@@ -97,5 +97,20 @@ hkeys key|获取hash中所有的字段
 hvals key|获取hash中所有的值
 hgetall key|获取hash中所有的字段和值
 ### List类型操作
+列表类型可以存储一个有序的字符串列表,内部使用双向链表实现,集合里面的元素可以重复  
+应用场景: 最新消息排行,消息队列    
+![List](https://raw.githubusercontent.com/duiying/note/master/img/list.png)  
+
 命令|含义
 :---|:---
+lpush key value [value ...]|在list的头部(左边)添加元素
+rpush key value [value ...]|在list的尾部(右边)添加元素
+llen key|返回list的长度,key不存在返回0,key对应的值不是list类型则返回错误
+lrange key start end|返回指定区间内的元素,下标从0开始
+ltrim key start end|截取list,保留指定区间内元素
+lset key index value|设置list中指定下标的元素值
+lrem key count value|从key对应list中删除count个和value相同的元素.count为0时删除全部
+lpop key|从list头部删除元素,并返回删除元素
+rpop key|从list尾部删除元素,并返回删除元素
+lindex key index|获取list中指定索引的值
+### 
