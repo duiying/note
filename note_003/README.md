@@ -48,3 +48,25 @@ redis的优势
         * 查看是否启动redis服务
             ps -ef | grep redis
 ```
+### 键名操作
+命令|含义
+:---|:---
+keys pattern|返回匹配指定模式的所有key
+keys *|获取redis中所有key
+keys key1*|获取redis中以key1开头的key
+exists key|指定key是否存在
+del key1 key2 ... keyN|删除指定key
+type key|返回指定key的value类型
+randomkey|返回从当前数据库中随机的一个key
+rename oldkey newkey|重命名
+dbsize|返回当前数据库的key数量
+expire key seconds|为指定key设置剩余秒数
+ttl key|返回key的剩余秒数
+select index|选择数据库(一共16个,0-15,默认是0)
+move key index|把key从当前数据库移动到指定数据库
+flushdb|删除当前数据库中所有key
+flushall|删除当前所有数据库中的所有key
+### String类型操作
+命令|含义
+:---|:---
+
