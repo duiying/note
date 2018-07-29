@@ -153,3 +153,59 @@ zcard key|返回集合中元素个数
 zscore key element|返回给定元素对应的score
 zremrangebyrank key min max|删除集合中排名在给定区间的元素
 zremrangebyscore key min max|删除集合中score在给定区间的元素
+### 安装PHP以及PHP安装redis扩展
+```
+* 安装PHP7
+    * 下载地址
+        http://php.net/get/php-7.2.2.tar.gz/from/a/mirror
+    * 进入目录  
+        cd /usr/src/
+    * 解压文件
+        tar -xzvf php-7.2.2.tar.gz
+    * 进入目录
+        cd php-7.2.2/
+    * 配置
+        ./configure --prefix=/home/work/study/soft/php --with-curl
+    * 编译
+        make
+    * 安装
+        make install
+    * 将PHP命令加入到环境变量
+        vi ~/.bash_profile
+        * 在最后增加一行
+            alias php=/home/work/study/soft/php/bin/php
+        * 使配置文件生效
+            source ~/.bash_profile
+        * 使用PHP命令检查PHP版本
+            [root@VM_12_22_centos /]# php -v
+            PHP 7.2.2 (cli) (built: Jul 19 2018 10:58:51) ( NTS )
+            Copyright (c) 1997-2018 The PHP Group
+            Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
+        * 将源码包下的php.ini拷贝到PHP安装目录,并且重命名
+            [root@VM_12_22_centos swoole]# cd /usr/src/php-7.2.2/
+            [root@VM_12_22_centos php-7.2.2]# cp php.ini-development /home/work/study/soft/php/etc/
+            [root@VM_12_22_centos php-7.2.2]# cd /home/work/study/soft/php/etc/
+            [root@VM_12_22_centos etc]# mv php.ini-development php.ini
+        * 查看php.ini文件的生效目录并移动php.ini到该目录
+            [root@VM_12_22_centos etc]# php -i | grep php.ini
+            Configuration File (php.ini) Path => /home/work/study/soft/php/lib
+            [root@VM_12_22_centos etc]# mv /home/work/study/soft/php/etc/php.ini /home/work/study/soft/php/lib/
+* PHP安装redis扩展
+    * 进入目录
+        cd /usr/src/
+    * 下载
+        git clone https://github.com/phpredis/phpredis
+    * 进入目录
+        cd phpredis/
+    * 生成configure文件
+        /home/work/study/soft/php/bin/phpize
+    * 配置
+        ./configure --with-php-config=/home/work/study/soft/php/bin/php-config
+    * 编译
+        make
+    * 安装
+        make install
+    * 修改php.ini,新增一行extension=redis(也有可能是extension=redis.so)
+        vim /home/work/study/soft/php/lib/php.ini
+    * 使用php -m命令查看PHP的扩展发现有redis,说明redis扩展安装成功
+```
