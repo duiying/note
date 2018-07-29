@@ -97,7 +97,7 @@ hkeys key|获取hash中所有的字段
 hvals key|获取hash中所有的值
 hgetall key|获取hash中所有的字段和值
 ### List类型操作
-列表类型可以存储一个有序的字符串列表,内部使用双向链表实现,集合里面的元素可以重复  
+列表类型可以存储一个有序的字符串列表,内部使用双向链表实现,列表里面的元素可以重复  
 应用场景: 最新消息排行,消息队列    
 ![List](https://raw.githubusercontent.com/duiying/note/master/img/list.png)  
 
@@ -113,4 +113,23 @@ lrem key count value|从key对应list中删除count个和value相同的元素.co
 lpop key|从list头部删除元素,并返回删除元素
 rpop key|从list尾部删除元素,并返回删除元素
 lindex key index|获取list中指定索引的值
-### 
+### Set类型操作
+集合类型里面的元素无序且不分左右(头尾),并且元素不可重复  
+应用场景: qq好友推荐,微博系统的关注关系  
+![Set](https://raw.githubusercontent.com/duiying/note/master/img/set.png)  
+
+命令|含义
+:---|:---
+sadd key member [member ...]|添加一个string元素到set集合中,成功返回1,元素已经存在返回0
+srem key member [member ...]|从set中移出给定元素,成功返回1
+smove p1 p2 member|从p1对应set中移出member并添加到p2对应set中
+scard key|返回set中元素的个数
+sismember key member|判断member是否在set中
+sinter key1 key2 [key ...]|返回指定list的交集
+sinterstore p1 key1 key2 [key ...]|同sinter,但是会同时把交集存在p1中
+sunion key1 key2 [key ...]|返回指定list的并集
+sunionstore p1 key1 key2 [key ...]|同sunion,并同时把并集保存到p1中
+sdiff key1 key2 [key ...]|返回指定list的差集
+sdiffstore dstkey key1 key2 [key ...]|同sdiff,并同时把差集保存到dstkey中
+smembers key|返回set的所有元素,结果是无序的
+### Sorted Set类型操作
