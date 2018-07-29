@@ -81,9 +81,21 @@ append key value|把key的值追加一个字符串
 substr key start end|截取key的值
 ### Hash类型操作
 使用散列类型存储汽车对象的结构图  
-![Hash](https://raw.githubusercontent.com/duiying/livecms/master/readmeimg/admin.png)  
+![Hash](https://raw.githubusercontent.com/duiying/note/master/img/hash.png)  
+
 命令|含义
 :---|:---
 hset key field value|给字段赋值,如果不存在则先创建,如果存在则更新
-hget key field|获取指定的hash字段
-
+hget key field|获取hash中指定字段的值
+hmset key field1 value1 ... fieldN valueN|给hash多个字段赋值
+hmget key field1 ... fieldN|获取hash中多个指定字段的值
+hincrby key field integer|给hash中指定字段加上指定值
+hexists key field|hash中指定字段是否存在
+hdel key field|删除hash中指定字段
+hlen key|获取hash中字段数量
+hkeys key|获取hash中所有的字段
+hvals key|获取hash中所有的值
+hgetall key|获取hash中所有的字段和值
+### List类型操作
+命令|含义
+:---|:---
