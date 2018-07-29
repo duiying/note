@@ -209,3 +209,208 @@ zremrangebyscore key min max|删除集合中score在给定区间的元素
         vim /home/work/study/soft/php/lib/php.ini
     * 使用php -m命令查看PHP的扩展发现有redis,说明redis扩展安装成功
 ```
+### PHP操作String类型
+```
+<?php
+/**
+ * String 类型操作
+ */
+
+// 连接redis
+$redis = new \Redis();
+$redis->connect('127.0.0.1', 6379);
+
+// 设置值
+$redis->set('string1', 'val1');
+
+// 获取值
+$val = $redis->get('string1');
+var_dump($val);
+
+// 设置值为整数
+$redis->set('string2', 4);
+
+// 进行加减操作
+$redis->incr('string2', 2);
+
+// 获取值
+$val = $redis->get('string2');
+var_dump($val);
+
+// 删除key
+$redis->delete('string1');
+$val = $redis->get('string1');
+var_dump($val);
+```
+运行:
+```
+string(4) "val1"
+string(1) "6"
+bool(false)
+```
+### PHP操作Hash类型
+```
+<?php
+/**
+ * Hash 类型操作
+ */
+
+// 连接redis
+$redis = new \Redis();
+$redis->connect('127.0.0.1', 6379);
+
+// 给字段赋值
+$redis->hSet('hash1', 'name', 'wyx');
+$redis->hSet('hash1', 'age', '18');
+$redis->hSet('hash1', 'gender', '1');
+
+// 获取字段值
+$name = $redis->hGet('hash1', 'name');
+var_dump($name);
+
+// 获取多个字段值
+$val = $redis->hMGet('hash1', array('name', 'age', 'gender'));
+var_dump($val);
+```
+运行:
+```
+string(3) "wyx"
+array(3) {
+  ["name"]=>
+  string(3) "wyx"
+  ["age"]=>
+  string(2) "18"
+  ["gender"]=>
+  string(1) "1"
+}
+```
+### PHP操作List类型
+```
+<?php
+/**
+ * List 类型操作
+ */
+
+// 连接redis
+$redis = new \Redis();
+$redis->connect('127.0.0.1', 6379);
+
+// 在list的头部加入元素
+$redis->lPush('list1', 'val1');
+$redis->lPush('list1', 'val2');
+$redis->lPush('list1', 'val3');
+
+// 从list的尾部删除元素,并返回删除元素
+$val1 = $redis->rPop('list1');
+var_dump($val1);
+
+// 从list的尾部删除元素,并返回删除元素
+$val2 = $redis->rPop('list1');
+var_dump($val2);
+```
+运行:
+```
+string(4) "val1"
+string(4) "val2"
+```
+### PHP操作Set类型
+```
+<?php
+/**
+ * Set 类型操作
+ */
+
+// 连接redis
+$redis = new \Redis();
+$redis->connect('127.0.0.1', 6379);
+
+// 向set集合中添加元素
+$redis->sAdd('set1', 'val1');
+$redis->sAdd('set1', 'val2');
+$redis->sAdd('set1', 'val3');
+$redis->sAdd('set1', 'val3');
+
+// 获取set集合中的元素数量
+$number = $redis->sCard('set1');
+var_dump($number);
+
+// 获取set集合中的所有元素
+$val = $redis->sMembers('set1');
+var_dump($val);
+```
+运行:
+```
+int(3)
+array(3) {
+  [0]=>
+  string(4) "val3"
+  [1]=>
+  string(4) "val1"
+  [2]=>
+  string(4) "val2"
+}
+```
+### PHP操作Sorted Set类型
+```
+<?php
+/**
+ * Sorted Set 类型操作
+ */
+
+// 连接redis
+$redis = new \Redis();
+$redis->connect('127.0.0.1', 6379);
+
+// 向集合中添加元素
+$redis->zAdd('zset1', 100, 'user1');
+$redis->zAdd('zset1', 90, 'user2');
+$redis->zAdd('zset1', 930, 'user3');
+
+// 从低到高输出集合的排行
+$res1 = $redis->zRange('zset1', 0, -1);
+var_dump($res1);
+
+// 从高到低输出集合的排行
+$res2 = $redis->zRevRange('zset1', 0, -1);
+var_dump($res2);
+<?php
+/**
+ * Sorted Set 类型操作
+ */
+
+// 连接redis
+$redis = new \Redis();
+$redis->connect('127.0.0.1', 6379);
+
+// 向集合中添加元素
+$redis->zAdd('zset1', 100, 'user1');
+$redis->zAdd('zset1', 90, 'user2');
+$redis->zAdd('zset1', 930, 'user3');
+
+// 从低到高输出集合的排行
+$res1 = $redis->zRange('zset1', 0, -1);
+var_dump($res1);
+
+// 从高到低输出集合的排行
+$res2 = $redis->zRevRange('zset1', 0, -1);
+var_dump($res2);
+```
+运行:
+```
+array(3) {
+  [0]=>
+  string(5) "user2"
+  [1]=>
+  string(5) "user1"
+  [2]=>
+  string(5) "user3"
+}
+array(3) {
+  [0]=>
+  string(5) "user3"
+  [1]=>
+  string(5) "user1"
+  [2]=>
+  string(5) "user2"
+}
+```
