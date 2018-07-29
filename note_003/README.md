@@ -37,4 +37,14 @@ redis的优势
         /usr/src/redis-4.0.2/src
     * 启动redis服务端
         ./redis-server
+    * 客户端登录
+    	[root@VM_12_22_centos ~]# redis-cli -h 127.0.0.1 -p 6379
+    * 以指定配置文件启动redis服务端
+    	cd /usr/src/redis-4.0.2
+        cp redis.conf myredis.conf
+        * 编辑myredis.conf,修改daemonize no为yes,表示让redis服务端在后台启动;为了安全性,也可以将port 6379改为别的端口,这里暂时不做修改
+        [root@VM_12_22_centos redis-4.0.2]# cd /usr/src/redis-4.0.2/src/
+		[root@VM_12_22_centos src]# ./redis-server /usr/src/redis-4.0.2/myredis.conf
+        * 查看是否启动redis服务
+        ps -ef | grep redis
 ```
