@@ -133,3 +133,23 @@ sdiff key1 key2 [key ...]|返回指定list的差集
 sdiffstore dstkey key1 key2 [key ...]|同sdiff,并同时把差集保存到dstkey中
 smembers key|返回set的所有元素,结果是无序的
 ### Sorted Set类型操作
+有序集合类型,集合中每个元素都关联了一个分数,通过这个分数来对元素进行从小到大的排序,有序集合中元素不可重复但是分数可以重复  
+如果有两个元素的score相同的话，则按照value来排序  
+应用场景: 数据排序  
+![Set](https://raw.githubusercontent.com/duiying/note/master/img/sortedset.png)
+
+命令|含义
+:---|:---
+zadd key score member|添加元素到集合,元素在集合中存在则更新对应score
+zrem key member|删除指定元素,1表示成功,如果元素不存在则返回0
+zincrby key incr member|按照incr幅度增加对应member的score值,返回score值
+zrank key member|返回指定元素在集合中的排名,集合元素是按score从小到大排序的
+zrevrank key member|同上, 但是集合中元素是按score逆序的
+zrange key start end|从集合中取出指定区间元素,返回有序结果
+zrevrange key start end|同上,返回结果是按socre逆序
+zrangebyscore key min max|返回集合中score在给定区间的元素
+zcount key min max|返回集合中score在给定区间的数量
+zcard key|返回集合中元素个数
+zscore key element|返回给定元素对应的score
+zremrangebyrank key min max|删除集合中排名在给定区间的元素
+zremrangebyscore key min max|删除集合中score在给定区间的元素
