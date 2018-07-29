@@ -69,4 +69,21 @@ flushall|删除当前所有数据库中的所有key
 ### String类型操作
 命令|含义
 :---|:---
+set key value|设置key的值
+get key|获取key的值
+mset key1 value1 key2 value2 ... keyN valueN|一次设置多个key的值
+mget key1 key2 ... keyN|一次获取多个key的值
+incr key|对key的值做++操作
+decr key|对key的值做--操作
+incrby key integer|把key的值加上指定值
+decrby key integer|把key的值减去指定值
+append key value|把key的值追加一个字符串
+substr key start end|截取key的值
+### Hash类型操作
+使用散列类型存储汽车对象的结构图  
+![Hash](https://raw.githubusercontent.com/duiying/livecms/master/readmeimg/admin.png)  
+命令|含义
+:---|:---
+hset key field value|给字段赋值,如果不存在则先创建,如果存在则更新
+hget key field|获取指定的hash字段
 
