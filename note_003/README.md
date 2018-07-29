@@ -1,4 +1,19 @@
 # redis
+### 内容概要
+* redis介绍
+* redis安装
+* 键名操作
+* String类型操作
+* Hash类型操作
+* List类型操作
+* Set类型操作
+* Sorted Set类型操作
+* 安装PHP以及PHP安装redis扩展
+* PHP操作String类型
+* PHP操作Hash类型
+* PHP操作List类型
+* PHP操作Set类型
+* PHP操作Sorted Set类型
 ### redis介绍
 ```
 redis是一个C语言编写的,高性能的,基于键值对的非关系型数据库
