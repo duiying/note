@@ -1,4 +1,4 @@
-# 利用存储过程插入海量数据
+# 利用存储过程插入海量数据以及分析慢查询
 ### 环境
 ```
 [root@VM_12_22_centos ~]# cat /etc/redhat-release
@@ -157,3 +157,71 @@ mysql> select * from student_noindex where student_id = 100000;
 1 row in set (0.88 sec)
 ```
 比较两次查询时间可知,索引的确可以有效提升查询速度
+### 开启慢查询
+```
+* 查看慢查询相关参数
+    mysql> show variables like 'slow_query%';
+    +---------------------+-----------------------------------------+
+    | Variable_name       | Value                                   |
+    +---------------------+-----------------------------------------+
+    | slow_query_log      | OFF                                     |
+    | slow_query_log_file | /var/lib/mysql/VM_12_22_centos-slow.log |
+    +---------------------+-----------------------------------------+
+    2 rows in set (0.01 sec)
+
+    mysql> show variables like 'long_query_time';
+    +-----------------+-----------+
+    | Variable_name   | Value     |
+    +-----------------+-----------+
+    | long_query_time | 10.000000 |
+    +-----------------+-----------+
+    1 row in set (0.00 sec)
+* 参数说明
+    slow_query_log 是否开启慢查询日志,OFF表示关闭
+    slow_query_log_file 慢查询日志文件存储位置
+    long_query_time 阈值查询时间,当超过该阈值时记录日志
+* 修改慢查询相关参数
+    * 编辑配置文件my.cnf
+        vim /etc/my.cnf
+    * 在[mysqld]的下方加入如下两行
+        [mysqld]
+        slow_query_log = ON
+        long_query_time = 1
+    * 重启MySQL服务
+        service mysqld restart
+    * 查看设置后的慢查询相关参数
+        mysql> show variables like 'slow_query%';
+        +---------------------+-----------------------------------------+
+        | Variable_name       | Value                                   |
+        +---------------------+-----------------------------------------+
+        | slow_query_log      | ON                                      |
+        | slow_query_log_file | /var/lib/mysql/VM_12_22_centos-slow.log |
+        +---------------------+-----------------------------------------+
+        2 rows in set (0.01 sec)
+
+        mysql> show variables like 'long_query_time';
+        +-----------------+----------+
+        | Variable_name   | Value    |
+        +-----------------+----------+
+        | long_query_time | 1.000000 |
+        +-----------------+----------+
+        1 row in set (0.00 sec)
+* 测试
+    * 使用tail -f命令实时观察日志文件内容的变化
+       tail -f /var/lib/mysql/VM_12_22_centos-slow.log
+    * 执行一条慢查询SQL
+        mysql> select * from student where student_name = 'fdlDfd';
+        Empty set (1.38 sec)
+    * 发现日志文件新增内容如下
+        # Time: 2018-08-10T23:40:17.531713Z
+        # User@Host: root[root] @ localhost []  Id:     2
+        # Query_time: 1.399043  Lock_time: 0.000112 Rows_sent: 0  Rows_examined: 8000000
+        use testdb;
+        SET timestamp=1533944417;
+        select * from student where student_name = 'fdlDfd';
+    * 慢查询日志分析
+        Query_time 查询时间
+        Lock_time 锁表时间
+        Rows_sent 返回记录数
+        Rows_examined 扫描记录数
+```
