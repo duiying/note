@@ -55,7 +55,7 @@ CREATE TABLE `student` (
         return return_str;
     end;
 * 测试rand_string函数
-	mysql> select rand_string(5);
+    mysql> select rand_string(5);
     +----------------+
     | rand_string(5) |
     +----------------+
@@ -86,17 +86,17 @@ CREATE TABLE `student` (
 # 创建存储过程 in表示输入参数 start是开始ID,max_num是插入条数
 create procedure insert_student(in start int(10),in max_num int(10))
 begin
-	declare i int default 0;
-	# 禁用事务自动提交
-	set autocommit = 0;
-	# repeat用于创建一个带有条件判断的循环过程,相当于do...while
-	repeat
-		#通过前面写的函数随机产生字符串和部门编号，然后加入到emp表
-		insert into student values ((start+i), rand_string(6), rand_num());
-		set i = i + 1;
-		until i = max_num
-	end repeat;
-	# 整体提交事务可以提高效率
+    declare i int default 0;
+    # 禁用事务自动提交
+    set autocommit = 0;
+    # repeat用于创建一个带有条件判断的循环过程,相当于do...while
+    repeat
+        #通过前面写的函数随机产生字符串和部门编号，然后加入到emp表
+        insert into student values ((start+i), rand_string(6), rand_num());
+        set i = i + 1;
+        until i = max_num
+    end repeat;
+    # 整体提交事务可以提高效率
   commit;
 end;
 ```
@@ -124,3 +124,36 @@ mysql> select * from student order by student_id desc limit 3;
 |    7999998 | vFNYFe       |          23 |
 +------------+--------------+-------------+
 ```
+### MyISAM类型表文件介绍
+.frm 表结构文件  
+.MYD 表数据文件  
+.MYI 表索引文件  
+```
+[root@VM_12_22_centos testdb]# pwd
+/var/lib/mysql/testdb
+[root@VM_12_22_centos testdb]# ll -h
+total 232M
+-rw-r----- 1 mysql mysql   61 Aug 10 13:07 db.opt
+-rw-r----- 1 mysql mysql 8.5K Aug 10 13:16 student.frm
+-rw-r----- 1 mysql mysql 153M Aug 10 15:37 student.MYD
+-rw-r----- 1 mysql mysql  79M Aug 10 15:37 student.MYI
+```
+由此可见,索引文件会占用比较大的空间,但是索引的存在可以有效提升查询速度  
+这里做一个测试,student表有索引,student_noindex表没有索引,数据量都是8百万,两张表的结构除了student_id属性有无索引不同之外其他完全相同
+```
+mysql> select * from student where student_id = 100000;
++------------+--------------+-------------+
+| student_id | student_name | student_age |
++------------+--------------+-------------+
+|     100000 | ciMiFC       |          28 |
++------------+--------------+-------------+
+1 row in set (0.00 sec)
+mysql> select * from student_noindex where student_id = 100000;
++------------+--------------+-------------+
+| student_id | student_name | student_age |
++------------+--------------+-------------+
+|     100000 | KZSoRt       |          16 |
++------------+--------------+-------------+
+1 row in set (0.88 sec)
+```
+比较两次查询时间可知,索引的确可以有效提升查询速度
