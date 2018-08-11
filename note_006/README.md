@@ -225,3 +225,45 @@ mysql> select * from student_noindex where student_id = 100000;
         Rows_sent 返回记录数
         Rows_examined 扫描记录数
 ```
+### 使用explain分析查询SQL
+```
+* 示例(\G作用是把每个字段打印到单独的行,\G后面注意不要再加;)
+    mysql> explain select * from student where student_name = 'fdlufd' \G
+    *************************** 1. row ***************************
+               id: 1
+      select_type: SIMPLE
+            table: student
+       partitions: NULL
+             type: ALL
+    possible_keys: NULL
+              key: NULL
+          key_len: NULL
+              ref: NULL
+             rows: 8000000
+         filtered: 10.00
+            Extra: Using where
+    1 row in set, 1 warning (0.00 sec)
+
+    mysql> explain select * from student where student_id = 1000000 \G
+    *************************** 1. row ***************************
+               id: 1
+      select_type: SIMPLE
+            table: student
+       partitions: NULL
+             type: const
+    possible_keys: PRIMARY
+              key: PRIMARY
+          key_len: 4
+              ref: const
+             rows: 1
+         filtered: 100.00
+            Extra: NULL
+    1 row in set, 1 warning (0.00 sec)
+* 解释explain的输出列
+    select_type 查询类型,SIMPLE表示是简单的查询类型
+    table 输出行锁引用的表名
+    type 显示连接使用的类型,ALL是最坏的情况,表示从头到尾全表扫描
+    possible_keys 表示可用的索引
+    key 实际使用的索引,NULL表示没有使用索引
+    rows 必须检查的用来返回请求数据的行数
+```
