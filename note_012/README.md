@@ -105,9 +105,35 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 * 修改root密码(mysql5.7默认安装了密码安全检查插件（validate_password),默认密码检查策略要求密码必须包含:大小写字母、数字和特殊符号,并且长度不能少于8位.)
     mysql> set password = password('WYX*wyx123');
 * 开放MySQL远程连接(%表示允许任何主机连接)
+
     mysql> use mysql;
     mysql> select host,user from user;
     mysql> update user set host = '%' where host = 'localhost' and user = 'root';
     mysql> flush privileges;
 ```
 ### 安装PHP
+```
+* 首先查看系统yum自带的PHP版本信息,发现PHP版本是5.4,有点低,需要安装其他yum源
+    yum info php
+* 安装epel源(epel是基于Fedora的一个项目,为"红帽系"的操作系统提供额外的软件包)
+    rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+* 安装webtatic源(安装webtatic-release之前需要先安装epel-release)
+    rpm -ivh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+* 查询安装过的webtatic包名
+    [root@localhost src]# rpm -qa | grep webtatic
+    webtatic-release-7-3.noarch
+* 如果要卸载
+    rpm -e webtatic-release
+* 查看webtatic源中PHP的版本,发现有很多可选版本,这里选择PHP7.2
+    [root@localhost src]# yum search php | grep fpm
+    php-fpm.x86_64 : PHP FastCGI Process Manager
+    php55w-fpm.x86_64 : PHP FastCGI Process Manager
+    php56w-fpm.x86_64 : PHP FastCGI Process Manager
+    php70w-fpm.x86_64 : PHP FastCGI Process Manager
+    php71w-fpm.x86_64 : PHP FastCGI Process Manager
+    php72w-fpm.x86_64 : PHP FastCGI Process Manager
+* 查看PHP可用的包
+    yum search php72w 或者 yum list | grep php72w
+* 安装PHP及其扩展
+    yum -y install mod_php72w php72w-bcmath php72w-cli php72w-common php72w-devel php72w-fpm php72w-gd php72w-mbstring php72w-mysql php72w-opcache php72w-pdo php72w-xml
+```
