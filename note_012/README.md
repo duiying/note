@@ -136,4 +136,56 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
     yum search php72w 或者 yum list | grep php72w
 * 安装PHP及其扩展
     yum -y install mod_php72w php72w-bcmath php72w-cli php72w-common php72w-devel php72w-fpm php72w-gd php72w-mbstring php72w-mysql php72w-opcache php72w-pdo php72w-xml
+* 启动服务
+    service php-fpm start
+* 查看进程
+    [root@localhost src]# ps -ef | grep fpm
+    root      21204      1  5 18:54 ?        00:00:00 php-fpm: master process (/etc/php-fpm.conf)
+    apache    21205  21204  0 18:54 ?        00:00:00 php-fpm: pool www
+    apache    21206  21204  0 18:54 ?        00:00:00 php-fpm: pool www
+    apache    21207  21204  0 18:54 ?        00:00:00 php-fpm: pool www
+    apache    21208  21204  0 18:54 ?        00:00:00 php-fpm: pool www
+    apache    21209  21204  0 18:54 ?        00:00:00 php-fpm: pool www
+    root      21211  10666  0 18:54 pts/0    00:00:00 grep --color=auto fpm
+````		
+### 配置nginx使其支持PHP
+```
+* 安装vim
+    yum -y install vim
+* 进入目录
+    cd /etc/nginx/conf.d
+* 删除default.conf并新建my.conf
+    server {
+        listen       80;
+        server_name  wyx.com;
+        root /data/www;
+        index index.html index.htm index.php;
+
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+        }
+
+        location ~ \.php$ {
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include fastcgi_params;
+            try_files $uri =404;
+        }
+    }
+* 重启nginx
+    service nginx restart
+* 新建目录
+    mkdir -p /data/www
+* 更改目录权限
+    chmod -R 777 /data/www
+* 新建文件index.php
+    vim /data/www/index.php
+    * index.php文件内容      
+        <?php
+            phpinfo();
+* 修改本地hosts(C:\Windows\System32\drivers\etc\hosts),新增一行
+    192.168.159.129 wyx.com
+* 浏览器访问wyx.com,发现报错403,是selinux没有关闭的原因,于是关闭selinux
+    setenforce 0
+* 此时wyx.com便会显示phpinfo的内容
 ```
