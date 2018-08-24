@@ -1,4 +1,4 @@
-# Vmware安装Centos7.3并搭建LNMP
+# Vmware安装Centos7.3并搭建LNMP以及配置TP5.1
 ### 安装Centos7.3
 ```
 * 镜像下载地址
@@ -188,4 +188,78 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 * 浏览器访问wyx.com,发现报错403,是selinux没有关闭的原因,于是关闭selinux
     setenforce 0
 * 此时wyx.com便会显示phpinfo的内容
+```
+### 使用composer下载TP5.1
+```
+* 安装composer
+    * 下载composer.phar
+        curl -sS https://getcomposer.org/installer | php
+    * 可以通过--install-dir选项指定composer的安装目录
+        curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/src/composer
+    * 把composer.phar放在系统的PATH目录中,就能在全局访问composer.phar
+        mv /usr/src/composer/composer.phar /usr/local/bin/composer
+    * 现在只需要运行composer命令就可以使用composer而不需要输入php composer.phar
+        [root@localhost www]# composer -V
+        Composer version 1.7.2 2018-08-16 16:57:12
+    * 使用国内镜像
+        composer config -g repo.packagist composer https://packagist.phpcomposer.com
+        或者
+        composer config -g repo.packagist composer https://packagist.laravel-china.org
+* 下载TP5.1
+    * 进入目录
+        cd /data/www
+    * 下载(tp5是自定义的目录名称)
+        composer create-project topthink/think tp5
+    * 浏览器访问http://wyx.com/index.php?s=index/index/hello,页面显示
+        hello,ThinkPHP5
+```
+### 配置nginx使其支持TP5.1的pathinfo模式,并隐藏入口文件index.php
+```
+* 编辑配置文件
+    vim /etc/nginx/conf.d/my.conf
+        server {
+            listen       80;
+            server_name  wyx.com;
+            root /data/www/tp5/public;
+            index index.html index.htm index.php;
+
+            location / {
+                if (!-e $request_filename) {
+                    rewrite  ^(.*)$  /index.php?s=$1  last;
+                    break;
+                }
+            }
+
+            location ~ .+.php($|/) {
+                set $script $uri;
+                set $path_info "/";
+                if ($uri ~ "^(.+.php)(/.+)") {
+                    set $script $1;
+                    set $path_info $2;
+                }
+                include fastcgi_params;
+                fastcgi_param PATH_INFO $path_info;
+                fastcgi_index index.php?IF_REWRITE=1;
+                fastcgi_pass 127.0.0.1:9000;
+                fastcgi_param SCRIPT_FILENAME $document_root/$script;
+                fastcgi_param SCRIPT_NAME $script;
+
+            }
+        }
+* 重启nginx
+    service nginx restart
+* 浏览器访问http://wyx.com/index/index/hello,页面显示
+    hello,ThinkPHP5
+```
+### TP5.1的一些修改
+```
+* 在入口文件中定义两个目录
+    vim /data/www/tp5/public/index.php
+        define('APP_PATH', dirname(__DIR__ . '/application'));
+        define('SITE_PATH', dirname(__DIR__));
+* 新建两个目录
+    * 业务逻辑层
+        mkdir -p /data/www/tp5/application/model/Biz
+    * 数据层
+        mkdir -p /data/www/tp5/application/model/Dao
 ```
