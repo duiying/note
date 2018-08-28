@@ -1,4 +1,5 @@
 # 面试
+通过面试题对一些看似简单的知识点进行尽可能的挖掘,弥补自己的不足
 ### Linux相关
 free命令
 ```
@@ -113,4 +114,40 @@ MySQL存储引擎之MyIsam和Innodb的区别,如何选择
 6)MyISAM仅支持表锁,并发较小;InnoDB支持行锁,并发较大
 7)使用delete删除表的时候,InnoDB是逐行删除;而MyISAM是先DROP表,然后重新建表,MyISAM的效率快
 8)对于select count(*) from 表名;MyISAM因为保存了表的行数可以直接取出;而InnoDB会遍历整个表来计算行数;但是对于加了WHERE条件,select count(*) from 表名 WHERE 条件;MyISAM和InnoDB都会遍历整个表来计算行号
+```
+MySQL中char和varchar类型的区别
+```
+char和varchar都用来表示字符串数据
+varchar长度可变,比如varchar(10),如果存储'github',会占用6个字符的长度;
+char长度不可变,比如char(10),如果存储''github',会占用10个字符的长度,'github'后面会跟4个空格,取数据的时候会将添加的空格trim掉
+因为char的长度固定,方便数据的存储和查找,所以char的时间效率比varchar高,但是char的空间占用比varchar高
+
+关于存储
+MySQL4.0以前,char(20)和varchar(20)指的是20个字节长度,如果存放utf8汉字(3个字节)时,只能存放6个
+5.0版本以上,char(20)和varchar(20)指的是20个字符长度,无论存放数字/字母/utf8汉字(3个字节),都可以存放20个
+
+char和varchar的最大存储
+char范围是0-255,可以存储255个字符
+varchar是0-65535(可以存放65532个字节的数据)
+为什么是65532呢,65535-1-2,减1的原因是实际存储从第二个字节开始,减2的原因是varchar头部的2个字节表示长度
+实际应用中varchar长度限制的是一个行定义的长度,MySQL要求一个行的定义长度不能超过65535字节
+若定义的表长度超过这个值，则提示
+ERROR 1118 (42000): Row size too large. The maximum row size for the used table type, not counting BLOBs, is 65535. You have to change some columns to TEXT or BLOBs
+
+MySQL对于varchar会有1-2个字节来保存字符长度,当字符数小于等于255时,MySQL只用1个字节来记录,因为2的8次方减1只能存到255,当字符数多于255就用2个字节
+
+英文字符和数字占1个字节,GBK字符集每个汉字占两个字节,UTF8字符集每个汉字占三个字节
+GBK 一个字符占1-2个字节,varchar最多能存 32766 个字符(65535-1-2 / 2)
+UTF8 一个字符占1-3个字节,varchar最多能存 21844 个字符(65535-1-2 / 3)
+
+举例说明
+a)若一个表只有一个varchar类型,如定义为
+create table t4(c varchar(N)) charset=gbk;
+则此处N的最大值为(65535-1-2)/2 = 32766 个字符
+减1的原因是实际存储从第二个字节开始,减2的原因是varchar头部的2个字节表示长度,除2的原因是字符编码是gbk
+
+b)若一个表定义为
+create table t4(c int, c2 char(30), c3 varchar(N)) charset=utf8;
+则此处N的最大值为(65535-1-2-4-30*3)/3=21812
+减1和减2与上例相同,减4的原因是int类型的c占4个字节,减30*3的原因是char(30)占用90个字节,编码是utf8 
 ```
