@@ -42,7 +42,6 @@ Example: array_merge_recursive.php
 执行结果
 ```
 ![array_merge_recursive_res](https://raw.githubusercontent.com/duiying/note/master/img/array_merge_recursive_res.png)
-```
 ### Linux相关
 free命令
 ***
