@@ -29,6 +29,20 @@ Example: add.php
 执行结果
 ```
 ![add_res](https://raw.githubusercontent.com/duiying/note/master/img/add_res.png)
+```
+对于用array_merge_recursive()函数合并数组
+如果是相同的数字索引,处理方式和array_merge相同,都是重建索引,新的索引从0开始
+如果是相同的字符串索引,会把相同的索引放到一个数组里面
+```
+```
+Example: array_merge_recursive.php
+```
+![array_merge_recursive](https://raw.githubusercontent.com/duiying/note/master/img/array_merge_recursive.png)
+```
+执行结果
+```
+![array_merge_recursive_res](https://raw.githubusercontent.com/duiying/note/master/img/array_merge_recursive_res.png)
+```
 ### Linux相关
 free命令
 ***
