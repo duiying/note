@@ -2,10 +2,12 @@
 通过面试题对一些看似简单的知识点进行尽可能的挖掘,弥补自己的不足
 ### PHP函数相关
 用array_merge()函数合并数组的时候,遇到索引相同的情况会怎么处理?还有哪些合并数组的方式,它们之间有什么不同?
+***
 ```
 对于array_merge()函数
 如果是相同的数字索引,array_merge()会重建索引,新的索引从0开始
 如果是相同的字符串索引,array_merge()会用后面数组的值覆盖掉前面的值
+其他合并数组的方式有: + 和 array_merge_recursive()函数
 ```
 ```
 Example: array_merge.php
@@ -15,7 +17,18 @@ Example: array_merge.php
 执行结果
 ```
 ![array_merge_res](https://raw.githubusercontent.com/duiying/note/master/img/array_merge_res.png)
-
+```
+对于用+来合并数组
+对于相同的数字索引和字符串索引,+会前面数组的值覆盖掉后面数组的值,合并后的数组索引保持不变
+```
+```
+Example: add.php
+```
+![add](https://raw.githubusercontent.com/duiying/note/master/img/add.png)
+```
+执行结果
+```
+![add_res](https://raw.githubusercontent.com/duiying/note/master/img/add_res.png)
 ### Linux相关
 free命令
 ***
