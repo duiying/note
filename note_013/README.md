@@ -2,6 +2,7 @@
 通过面试题对一些看似简单的知识点进行尽可能的挖掘,弥补自己的不足
 ### Linux相关
 free命令
+***
 ```
 * Example
 [root@localhost ~]# free 
@@ -30,6 +31,7 @@ total = used + free + buff/cache
 available = free + buff/cache中可以回收的内存
 ```
 top命令主要看什么参数
+***
 ```
 * Example
 [root@localhost ~]# top
@@ -88,10 +90,11 @@ COMMAND 命令名/命令行
 ```
 ### MySQL相关
 表的约束有哪些
+***
 ```
 为了防止数据表中插入错误的数据,在MySQL中,定义了一些维护数据库完整性的规则,即表的约束
 * 常见约束
-	PRIMARY KEY 主键约束
+    PRIMARY KEY 主键约束
     FOREIGN KEY 外键约束
     NOT NULL 非空约束
     UNIQUE 唯一性约束(在MySQL中,唯一性约束和唯一索引概念不同,但是实际效果相同)
@@ -105,6 +108,7 @@ create table yueshu(id int primary key,
 id字段有主键约束,name字段有唯一约束和非空约束,location字段有默认约束
 ```
 MySQL存储引擎之MyIsam和Innodb的区别,如何选择
+***
 ```
 1)InnoDB支持事务;MyISAM不支持
 2)MyISAM强调的是性能,查询速度比InnoDB快;InnoDB适合频繁修改以及涉及到安全性较高的应用
@@ -116,6 +120,7 @@ MySQL存储引擎之MyIsam和Innodb的区别,如何选择
 8)对于select count(*) from 表名;MyISAM因为保存了表的行数可以直接取出;而InnoDB会遍历整个表来计算行数;但是对于加了WHERE条件,select count(*) from 表名 WHERE 条件;MyISAM和InnoDB都会遍历整个表来计算行号
 ```
 MySQL中char和varchar类型的区别
+***
 ```
 char和varchar都用来表示字符串数据
 varchar长度可变,比如varchar(10),如果存储'github',会占用6个字符的长度;
@@ -151,3 +156,35 @@ create table t4(c int, c2 char(30), c3 varchar(N)) charset=utf8;
 则此处N的最大值为(65535-1-2-4-30*3)/3=21812
 减1和减2与上例相同,减4的原因是int类型的c占4个字节,减30*3的原因是char(30)占用90个字节,编码是utf8 
 ```
+tinyint占多少个字节,tinyint(1)能表示的数据范围
+***
+```
+这个问题首先要掌握整数类型所占的字节数和能表示的数据范围,另外拓展一下,还要掌握浮点数类型和定点数类型
+```
+```
+整型
+```
+数据类型|字节数|无符号取值范围|有符号取值范围
+--|--|--|--|--
+TINYINT|1|0-255|-128-127
+SMALLINT|2|0-65535|-32768-32767
+MEDIUMINT|3|0-16777215|-8388608-8388607
+INT|4|0-4294967295|-2147483648-2147483647
+BIGINT|8|0-18446744073709551615|-9223372036854775808-9223372036854775807
+```
+TINYINT(M)中M表示的含义是什么,比如TINYINT(1)
+M的含义并不是允许存入的字符长度,无符号TINYINT(1)可以存入其最大值255,而且存入的数值无论是0还是255,占用的字节大小是固定的,都是1
+那么这个M值到底代表什么,有什么作用?
+整型的字节数已经限制了存入数值的取值范围,M值在这里不会有任何影响,比如TINYINT(1)和TINYINT(2)没有区别
+如果设置zerofill(左前位置零填充),对于TINYINT(1)和TINYINT(2),如果存入1,TINYINT(1)存入的是1,而TINYINT存入的是01
+也就是说,没有zerofill,M值是没用的
+所以在设计字段的时候,mysql会自动分配长度:int(11)、tinyint(4)、smallint(6)、mediumint(9)、bigint(20)
+就用这些默认长度就可以了,不用自己搞int(10),tinyint(1)之类的,基本没什么用而且导致表的字段类型多样化
+TINYINT(M)、SMALLINT(M)、MEDIUMINT(M)、INT(M)、BIGINT(M)是同理的,没有zerofill,M值是没用的
+```
+```
+浮点型和定点型
+```
+![float](https://raw.githubusercontent.com/duiying/note/master/img/float.png)
+
+tinyint占多少字节 三范式 mysql索引有哪些 cookie禁用怎么办 cookie和session了解吗有什么区别 session存放在哪里 面向对象 抽象类和接口之间区别 设计模式了解哪些,单例模式的实现思路 抽象类能否定义非抽象方法 访问权限有哪些 面向对象的特性是什么,应用 魔术方法有哪些 用过哪些 mysql数组函数尽可能的多说 合并merge,如果索引冲突会发生什么,还有其他方法可以合并数组 + +和merge的区别 说一下常用的排序算法,,冒泡/插入/快排怎么实现,时间复杂度如何 trait了解吗 引用和传值,,举例,对象和数组是传引用还是传值 redis的数据类型,List使用场景是哪些 
