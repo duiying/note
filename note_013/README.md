@@ -42,6 +42,36 @@ Example: array_merge_recursive.php
 执行结果
 ```
 ![array_merge_recursive_res](https://raw.githubusercontent.com/duiying/note/master/img/array_merge_recursive_res.png)
+### 面向对象相关
+
+### HTTP相关
+cookie和session了解吗?有什么区别?session保存在服务器哪个目录?禁用cookie怎么保存会话信息
+***
+```
+因为HTTP协议是无状态的,一个用户在访问不同页面时,要识别出这是同一个用户,就要用到会话技术,会话技术包括cookie和session
+cookie保存在客户端,session保存在服务端,保存目录由php.ini里面session.save_path参数确定
+
+session的原理
+前提是开启了session,第一次访问页面时,服务端生成一个不重复的sessionid(当前会话id)以及命名为sess_xxx的session文件,保存在php.ini文件中指定的目录
+文件中保存着存储的session信息,xxx即为sessionid,sessionid可以通过session_id()函数来获取
+同时返回响应头(Response Header)Set-Cookie:PHPSESSIONID=xxxxxxx
+客户端接受到Set-Cookie响应头,将sessionid写入cookie,cookie的key为PHPSESSID,value为sessionid
+比如PHPSESSID=jlis2mcmv6d5hejkemom77ibm3
+
+当第二次访问页面时,客户端会把cookie放在请求头(Request Header)中,服务端识别PHPSESSID这个cookie
+然后根据这个cookie获取当前会话ID(sessionid),从而找到对应的session文件,再从session文件中读取信息
+
+cookie和session的区别
+cookie保存在客户端,session依赖于cookie保存在服务端,如果禁用cookie则session也不可用
+cookie大小有限制,session大小限制取决于服务器
+cookie信息保存在客户端,不安全,session保存在服务端,安全
+session保存在服务端会消耗服务端资源,如果考虑到性能可以保存到cookie
+
+禁用cookie
+禁用cookie后,服务器每次session_start()的时候都会创建一个单独的session文件,后果就是无法让多个页面共享同一份session,也就是会话失效
+
+```
+
 ### Linux相关
 free命令
 ***
@@ -275,4 +305,4 @@ MySQL索引有哪些
 主键索引(PRIMARY KEY):列值唯一,不允许有空值,一张表最多有一个主键索引
 组合索引:在多个字段上创建的索引,只有查询条件使用了第一个字段时,该索引才会被使用
 ```
-cookie禁用怎么办 cookie和session了解吗有什么区别 session存放在哪里 面向对象 抽象类和接口之间区别 设计模式了解哪些,单例模式的实现思路 抽象类能否定义非抽象方法 访问权限有哪些 面向对象的特性是什么,应用 魔术方法有哪些 用过哪些 mysql数组函数尽可能的多说 合并merge,如果索引冲突会发生什么,还有其他方法可以合并数组 + +和merge的区别 说一下常用的排序算法,,冒泡/插入/快排怎么实现,时间复杂度如何 trait了解吗 引用和传值,,举例,对象和数组是传引用还是传值 redis的数据类型,List使用场景是哪些 ,, composer具体的命令用过哪些 git分支应该怎么设计 函数重载 self和$this的区别
+cookie禁用怎么办 cookie和session了解吗有什么区别 session存放在哪里 面向对象 抽象类和接口之间区别 设计模式了解哪些,单例模式的实现思路 抽象类能否定义非抽象方法 访问权限有哪些 面向对象的特性是什么,应用 魔术方法有哪些 用过哪些 mysql数组函数尽可能的多说  说一下常用的排序算法,,冒泡/插入/快排怎么实现,时间复杂度如何 trait了解吗 引用和传值,,举例,对象和数组是传引用还是传值 redis的数据类型,List使用场景是哪些 ,, composer具体的命令用过哪些 git分支应该怎么设计 函数重载 self和$this的区别
