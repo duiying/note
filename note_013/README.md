@@ -54,7 +54,7 @@ cookie保存在客户端,session保存在服务端,保存目录由php.ini里面s
 session的原理
 前提是开启了session,第一次访问页面时,服务端生成一个不重复的sessionid(当前会话id)以及命名为sess_xxx的session文件,保存在php.ini文件中指定的目录
 文件中保存着存储的session信息,xxx即为sessionid,sessionid可以通过session_id()函数来获取
-同时返回响应头(Response Header)Set-Cookie:PHPSESSIONID=xxxxxxx
+同时返回响应头(Response Header)Set-Cookie:PHPSESSID=xxxxxxx
 客户端接受到Set-Cookie响应头,将sessionid写入cookie,cookie的key为PHPSESSID,value为sessionid
 比如PHPSESSID=jlis2mcmv6d5hejkemom77ibm3
 
@@ -69,7 +69,29 @@ session保存在服务端会消耗服务端资源,如果考虑到性能可以保
 
 禁用cookie
 禁用cookie后,服务器每次session_start()的时候都会创建一个单独的session文件,后果就是无法让多个页面共享同一份session,也就是会话失效
+解决方法:
+首先判断是否有PHPSESSID参数是否存在,如果存在就使用这个参数来获得sessionid,如果没有就创建一个新的sessionid;
+然后在每个链接上都加上PHPSESSID=sessionid
+Example: x.php
+<?php
 
+if(isset($_GET['PHPSESSID'])){
+    session_id($_GET['PHPSESSID']);
+}
+
+session_start();
+$sid = session_id();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>页面</title>
+</head>
+<body>
+<a href="xxx.php?PHPSESSID=<?php echo $sid;?>">链接</a>
+</body>
+</html>
 ```
 
 ### Linux相关
