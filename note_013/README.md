@@ -33,6 +33,14 @@ NULL是值传递,可以用&符号做到引用传递
 Example: transmit.php
 ```
 ![transmit](https://raw.githubusercontent.com/duiying/note/master/img/transmit.png)
+```
+深入理解对象的传递方式
+```
+```
+Example: objectTransmit.php
+```
+![objectTransmit](https://raw.githubusercontent.com/duiying/note/master/img/objectTransmit.png)
+
 ### PHP函数相关
 用array_merge()函数合并数组的时候,遇到索引相同的情况会怎么处理?还有哪些合并数组的方式,它们之间有什么不同?
 ***
