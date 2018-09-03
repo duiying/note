@@ -42,5 +42,9 @@ class Person
 }
 
 $person = new Person;
+// 打印结果: one param: one
 $person->say('one');
+// 打印结果: two param: one,two
 $person->say('one', 'two');
+
+
