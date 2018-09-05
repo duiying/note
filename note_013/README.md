@@ -28,6 +28,38 @@ Git分支管理策略
 
 ```
 ### PHP基础相关
+isset和array_key_exists()之间的区别
+***
+```
+基本区别是isset可用于数组和变量,而array_key_exists()只可用于数组
+但是最主要区别是两者在某种情况下的返回值不同
+    array_key_exists()检查数组中键名是否存在
+    isset同时检查键名和键值,只有键名存在,键值不为NULL的情况才返回TRUE
+       
+* Example
+<?php
+/**
+ * 比较isset和array_key_exists()
+ */
+
+$arr = ['key1' => 'val1', 'key2' => NULL];
+
+// 打印结果: bool(true) bool(false)
+var_dump(isset($arr['key1']), isset($arr['key2']));
+// 打印结果: bool(true) bool(true)
+var_dump(array_key_exists('key1', $arr), array_key_exists('key2', $arr));
+```
+```
+拓展: 还有一个常见问题是isset和empty之间的区别是什么?
+empty: 检查一个变量是否为空
+若变量不存在则返回TRUE
+若变量为空字符串、0、'0'、NULL、FALSE、array()、没有任何属性的对象，则返回TRUE
+若变量被unset，则返回TRUE
+
+isset：检查一个变量是否存在
+若变量值为NULL或者变量被unset之后，则返回FALSE
+```
+
 PHP重写是什么?重载是什么?
 ***
 ```
