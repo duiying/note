@@ -28,6 +28,13 @@ Git分支管理策略
 
 ```
 ### PHP基础相关
+如何获取客户端IP和服务端IP
+***
+```
+客户端IP: $_SERVER['REMOTE_ADDR']
+服务端IP: $_SERVER['SERVER_ADDR']
+```
+
 include/include_once和require/require_once之间的区别
 ***
 ```
