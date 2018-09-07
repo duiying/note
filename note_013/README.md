@@ -282,6 +282,277 @@ Example: array_merge_recursive.php
 ```
 ![array_merge_recursive_res](https://raw.githubusercontent.com/duiying/note/master/img/array_merge_recursive_res.png)
 ### 面向对象相关
+描述出PHP类中的常见魔术方法(最少5个)
+***
+```
+构造函数和析构函数
+__construct() 在每次创建新对象时先调用此方法
+__destruct() 在某个对象的所有引用都被删除或者当对象被显式销毁时执行
+
+在给不可访问属性赋值时,__set() 会被调用,__set() 方法用于设置私有属性值
+读取不可访问属性的值时,__get() 会被调用,__get() 方法用于获取私有属性值
+当对不可访问属性调用 isset()时,__isset() 会被调用,__isset() 方法用于检测私有属性值是否被设定
+当对不可访问属性调用 unset() 时,__unset() 会被调用,__unset() 方法用于删除私有属性
+
+在对象中调用一个不可访问方法时,__call()会被调用
+__toString() 方法用于一个对象被当成字符串时应怎样回应,此方法必须返回一个字符串,否则将发出一条 E_RECOVERABLE_ERROR 级别的致命错误
+```
+__construct()
+```
+如果子类中定义了构造函数则不会隐式调用其父类的构造函数
+要执行父类的构造函数,需要在子类的构造函数中调用 parent::__construct()
+如果子类没有定义构造函数则会如同一个普通的类方法一样从父类继承(假如没有被定义为 private 的话)
+
+* Example
+<?php
+/**
+ * __construct()
+ */
+
+class BaseClass {
+   function __construct() {
+       print "In BaseClass constructor\n";
+   }
+}
+
+class SubClass extends BaseClass {
+   function __construct() {
+       parent::__construct();
+       print "In SubClass constructor\n";
+   }
+}
+
+class OtherSubClass extends BaseClass {
+    // inherits BaseClass's constructor
+}
+
+// In BaseClass constructor
+$obj = new BaseClass();
+
+// In BaseClass constructor
+// In SubClass constructor
+$obj = new SubClass();
+
+// In BaseClass constructor
+$obj = new OtherSubClass();
+```
+__destruct()
+```
+析构函数和构造函数类似
+如果子类中定义了析构函数则不会隐式调用其父类的析构函数
+要执行父类的析构函数,需要在子类的析构函数中调用 parent::__destruct()
+如果子类没有定义析构函数则会如同一个普通的类方法一样从父类继承(假如没有被定义为 private 的话)
+
+* Example
+<?php
+/**
+ * __destruct()
+ */
+
+class BaseClass {
+   function __destruct() {
+       print "In BaseClass destructor\n";
+   }
+}
+
+class SubClass extends BaseClass {
+   function __destruct() {
+       parent::__destruct();
+       print "In SubClass destructor\n";
+   }
+}
+
+class OtherSubClass extends BaseClass {
+    // inherits BaseClass's destructor
+}
+
+// In BaseClass destructor
+$obj = new BaseClass();
+
+// In BaseClass destructor
+// In SubClass destructor
+$obj = new SubClass();
+
+// In BaseClass destructor
+$obj = new OtherSubClass();
+```
+__get()
+```
+* Example
+<?php
+/**
+ * __get()
+ */
+
+class Info
+{
+	private $name;
+
+	public function __construct() {
+		$this->name = 'wyx';
+	}
+
+	public function __get($key) {
+		if (isset($this->$key)) return $this->$key;
+		return 'not exist'; 
+	}
+}
+
+$obj = new Info();
+// wyx
+echo $obj->name;
+// not exist
+echo $obj->noexist;
+```
+__set()
+```
+* Example
+<?php
+/**
+ * __set()
+ */
+
+class Info
+{
+	private $name;
+
+	public function __construct() {
+		$this->name = 'wyx';
+	}
+
+	public function __get($key) {
+		if (isset($this->$key)) return $this->$key;
+		return 'not exist'; 
+	}
+
+	public function __set($key, $val) {
+		$this->$key = $val;
+	}
+}
+
+$obj = new Info();
+$obj->name = 'akun';
+// akun
+echo $obj->name;
+```
+__isset()
+```
+* Example
+<?php
+/**
+ * __isset()
+ */
+
+class Info
+{
+	private $name;
+
+	public function __construct() {
+		$this->name = 'wyx';
+	}
+
+	public function __isset($key) {
+		return isset($this->$key);  
+	}
+}
+
+$obj = new Info();
+// bool(true)
+var_dump(isset($obj->name));
+// bool(false)
+var_dump(isset($obj->noexist));
+```
+__unset()
+```
+* Example
+<?php
+/**
+ * __isset()
+ */
+
+class Info
+{
+	private $name;
+
+	public function __construct() {
+		$this->name = 'wyx';
+	}
+
+	public function __get($key) {
+		if (isset($this->$key)) return $this->$key;
+		return 'not exist'; 
+	}
+
+	public function __unset($key) {
+		unset($this->$key); 
+	}
+}
+
+$obj = new Info();
+// wyx
+echo $obj->name;
+unset($obj->name);
+// not exist
+echo $obj->name;
+```
+__call()
+```
+* Example
+<?php
+/**
+ * __call()
+ */
+
+class Info
+{
+	private $name;
+
+	public function __construct() {
+		$this->name = 'wyx';
+	}
+
+	/**
+	 * public mixed __call ( string $name , array $arguments )
+	 * @param string $name 要调用的方法名称
+	 * @param array $arguments 一个枚举数组,包含着要传递给方法 $name 的参数
+	 */
+	public function __call($name, $arguments) {
+		echo '未定义方法' . '<br>';
+		print_r($arguments);
+	}
+}
+
+$obj = new Info();
+// 未定义方法
+// Array ( [0] => wyx [1] => 18 ) 
+$obj->nonMethod('wyx', 18);
+```
+__toString()()
+```
+* Example
+<?php
+/**
+ * __toString()
+ */
+
+class Info
+{
+	private $name;
+
+	public function __construct() {
+		$this->name = 'wyx';
+	}
+
+	public function __toString() {
+		return 'Object: name = ' . $this->name;
+	}
+}
+
+$obj = new Info();
+// Object: name = wyx
+echo $obj;
+```
+
 
 ### HTTP相关
 cookie和session了解吗?有什么区别?session保存在服务器哪个目录?禁用cookie怎么保存会话信息
