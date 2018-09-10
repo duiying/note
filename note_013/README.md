@@ -28,6 +28,131 @@ Git分支管理策略
 
 ```
 ### PHP基础相关
+PHP中自动加载(autoload)功能包含哪几种,实现方法是什么
+***
+```
+首先说一下为什么需要自动加载
+如果没有自动加载,我们要使用某个类,比如include或require该文件之后才能使用
+每次使用一个类,都要写一条include或require,造成代码冗余
+
+要实现自动加载,有两种方法,__autoload()和spl_autoload_register()
+
+二者的区别
+__autoload()只能定义一次
+spl_autoload_register()可定义多个,可以有效地创建一个队列的自动装载函数并按照顺序依次执行
+```
+准备工作
+```
+* ./Library/Code.php
+<?php
+/**
+ * 模拟验证码类
+ */
+namespace Library;
+
+class Code
+{
+	public function __construct() {
+		echo 'Code Class init successfully' . '<br>'; 
+	}
+}
+
+* ./Library/DB.php
+<?php
+/**
+ * 模拟DB类
+ */
+namespace Library;
+
+class DB
+{
+	public function __construct() {
+		echo 'DB Class init successfully' . '<br>'; 
+	}
+}
+```
+__autoload()
+```
+* ./index.php
+<?php
+
+define('BASEDIR', __DIR__);
+
+/**
+ * __autoload(String $class)
+ * 尝试加载未定义的类
+ * @param String $class 待加载的类名(当使用命名空间时,包含命名空间部分一起作为参数)
+ */
+function __autoload($class) {
+	// str_replace() 一定要将反斜线转义,否则报错
+	$file = BASEDIR . '/' . str_replace('\\', '/', $class) . '.php';
+	
+	/**
+	 * file_exists(path)
+	 * 检查文件或者目录是否存在
+	 * @param path 要检查的路径
+	 * 如果指定的文件或目录存在则返回true,否则返回false
+	 */
+	if (file_exists($file)) {
+		require_once $file;
+	} else {
+		// exit() 函数输出一条消息,并退出当前脚本,exit()函数和die()函数互为别名
+		exit("Can't find class " . $class);
+	}
+}
+
+// Code Class init successfully
+$codeObj = new Library\Code();
+// DB Class init successfully
+$dbObj = new Library\DB();
+// Can't find class Library\NotExistClass
+$dbObj = new Library\NotExistClass();
+```
+spl_autoload_register()
+```
+* ./Core/Loader.php
+<?php
+/**
+ * 自动载入类
+ */
+namespace Core;
+
+class Loader
+{
+	// 自定义__autoload()函数
+	public static function myAutoload($class) {
+		$file = BASEDIR . '/' . str_replace('\\', '/', $class) . '.php';
+		
+		if (file_exists($file)) {
+			require_once $file;
+		} else {
+			exit("Can't find class " . $class);
+		}
+	}
+}
+
+* ./index.php
+<?php
+
+define('BASEDIR', __DIR__);
+
+include BASEDIR . '/Core/Loader.php';
+
+// spl_autoload_register(array('class_name', 'method_name'))
+// spl_autoload_register(['Core\Loader', 'myAutoload']);
+
+// spl_autoload_register('func_name')
+spl_autoload_register('Core\Loader::myAutoload');
+
+// Code Class init successfully
+$codeObj = new Library\Code();
+// DB Class init successfully
+$dbObj = new Library\DB();
+// Can't find class Library\NotExistClass
+$dbObj = new Library\NotExistClass();
+```
+
+
 描述一下常见的关于读取文件内容的PHP函数,及各自的特点
 ***
 介绍以下三个函数
