@@ -365,6 +365,26 @@ Example: objectTransmit.php
 ![objectTransmit](https://raw.githubusercontent.com/duiying/note/master/img/objectTransmit.png)
 
 ### PHP函数相关
+在PHP中error_reporting()这个函数有什么作用?
+***
+```
+error_reporting的作用是设置错误报告级别
+可以通过两种方式来设置错误级别,一种是在php.ini文件中修改,另外一种是通过error_reporting函数设置
+error_reporting函数只在当前脚本文件生效
+
+error_reporting(report_level)
+report_level常见的值有
+E_ALL 所有可能出现的错误
+E_ERROR 运行时致命错误,程序停止执行
+E_WARNING 非致命的警告错误,程序不会停止执行
+E_PARSE 编译时解析错误
+E_NOTICE 通知类错误
+
+error_reporting(E_ALL & ~E_NOTICE);//报告所有错误但是除了E_NOTICE级别的错误
+error_reporting(E_ALL);//报告所有错误
+error_reporting(E_ERROR | E_WARNING | E_PARSE);//只报告E_ERROR、E_WARNING、E_NOTICE三种错误
+```
+
 用array_merge()函数合并数组的时候,遇到索引相同的情况会怎么处理?还有哪些合并数组的方式,它们之间有什么不同?
 ***
 ```
@@ -680,6 +700,13 @@ echo $obj;
 
 
 ### HTTP相关
+表单中get和post提交方法的区别
+***
+```
+get通过url传递参数,传递参数数据量有限,由于参数暴露在url所以安全性较低
+post通过请求体传递参数,传递参数没有大小限制,安全性较高
+```
+
 cookie和session了解吗?有什么区别?session保存在服务器哪个目录?禁用cookie怎么保存会话信息
 ***
 ```
