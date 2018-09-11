@@ -6,6 +6,7 @@
 * PHP基础相关
 * PHP函数相关
 * 面向对象相关
+* 设计模式相关
 * HTTP相关
 * Linux相关
 * MySQL相关
@@ -441,6 +442,7 @@ __destruct() 在某个对象的所有引用都被删除或者当对象被显式�
 
 在对象中调用一个不可访问方法时,__call()会被调用
 __toString() 方法用于一个对象被当成字符串时应怎样回应,此方法必须返回一个字符串,否则将发出一条 E_RECOVERABLE_ERROR 级别的致命错误
+__clone() 当通过关键字clone克隆一个对象时,新创建的对象(即克隆生成的对象)中的__clone()方法会被调用
 ```
 __construct()
 ```
@@ -697,7 +699,118 @@ $obj = new Info();
 // Object: name = wyx
 echo $obj;
 ```
+__clone()
+```
+语法格式: $新克隆对象名称 = clone $原对象名称;
+对象的__clone方法不能被直接调用,只有通过关键字clone克隆一个对象时才会调用新克隆对象的__clone方法
+当克隆一个对象时,如果对象的__clone方法不存在,会调用默认的__clone方法,复制对象的所有属性
+如果__clone方法存在,存在的__clone方法会覆盖默认的__clone方法,通常在__clone方法中覆盖那些需要更改的属性
 
+* Example
+<?php
+/**
+ * __clone()
+ */
+
+class Info
+{
+	private $name;
+	private $age;
+
+	public function __construct() {
+		$this->name = 'wyx';
+		$this->age = 18;
+	}
+
+	public function __clone() {
+		// $this指向的是新克隆的对象
+		$this->name = 'clone wyx';
+	}
+}
+
+$objA = new Info();
+// object(Info)#1 (2) { ["name":"Info":private]=> string(3) "wyx" ["age":"Info":private]=> int(18) }
+var_dump($objA);
+
+// $objB和$objA指向的是同一个对象
+$objB = $objA;
+// object(Info)#1 (2) { ["name":"Info":private]=> string(3) "wyx" ["age":"Info":private]=> int(18) } 
+var_dump($objB);
+
+// $objClone和$objA指向的是完全不同的两个对象
+$objClone = clone $objA;
+// object(Info)#2 (2) { ["name":"Info":private]=> string(9) "clone wyx" ["age":"Info":private]=> int(18) }  
+var_dump($objClone);
+```
+__clone()浅拷贝
+```
+什么是浅拷贝
+对象属性值如果是非对象,新克隆的对象与原对象是完全独立的两个对象
+对象属性值如果是对象,新克隆的对象的属性值和原对象的属性值指向的是同一个对象
+
+* Example
+<?php
+/**
+ * __clone()深拷贝和浅拷贝
+ */
+
+class Info
+{
+	private $name;
+	private $newObj;
+
+	public function __construct() {
+		$this->name = 'wyx';
+		$this->newObj = new NewClass();
+	}
+
+	public function __clone() {
+		// 浅拷贝,当对象属性值是对象时,新克隆对象属性值和原对象指向的是同一个对象
+		// 当新克隆对象的属性值发生变化时,原对象属性值也会发生变化
+		$this->newObj->newAttr = 'change attr';
+	}
+}
+
+class NewClass
+{
+	public $newAttr = 'new attr';
+}
+
+$objA = new Info();
+// object(Info)#1 (2) { ["name":"Info":private]=> string(3) "wyx" ["newObj":"Info":private]=> object(NewClass)#2 (1) { ["newAttr"]=> string(8) "new attr" } } 
+var_dump($objA);
+
+$objClone = clone $objA;
+// object(Info)#3 (2) { ["name":"Info":private]=> string(3) "wyx" ["newObj":"Info":private]=> object(NewClass)#2 (1) { ["newAttr"]=> string(11) "change attr" } }
+var_dump($objClone);
+
+// object(Info)#1 (2) { ["name":"Info":private]=> string(3) "wyx" ["newObj":"Info":private]=> object(NewClass)#2 (1) { ["newAttr"]=> string(11) "change attr" } } 
+var_dump($objA);
+```
+__clone()深拷贝
+```
+相对于浅拷贝,深拷贝要求即使对象属性值是对象时,新克隆对象的属性值和原对象的属性值也不能是同一个对象
+
+一种解决方法是使用__clone()方法
+public function __clone() {
+	$this->newObj = new NewClass();
+}
+这种解决方法弊端在于如果为对象的属性值太多的话,造成代码冗余
+
+另一种解决方法是序列化与反序列化
+将
+$objClone = clone $objA;
+替换为下面的代码
+$objClone = unserialize(serialize($objA));
+```
+
+
+### 设计模式相关
+实现单例模式
+***
+```
+
+```
 
 ### HTTP相关
 表单中get和post提交方法的区别
