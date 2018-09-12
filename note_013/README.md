@@ -809,7 +809,34 @@ $objClone = unserialize(serialize($objA));
 实现单例模式
 ***
 ```
+理解单例模式: 单例模式即一个类只能实例化一次,当其再次实例化时,返回第一次实例化的对象,可以节省资源
+单例模式常见的应用是数据库类的实例化
 
+实现思路: 三私一公
+私有的构造方法 (限制只能类内部实例化,防止类外部实例化)
+私有的克隆方法 (防止通过克隆生成对象)
+私有的静态属性 (保存类的实例)
+公有的静态方法 (提供实例,实例化前先判断该类是否已经被实例化,若是则返回实例化对象,若不是则实例化对象并将该对象保存在类的静态属性中)
+
+* Example
+<?php
+/**
+ * 单例模式
+ */
+
+class Single
+{
+	private static $instance;
+	
+	private function __clone() {}
+	
+	private function __construct() {}
+	
+	public static function getInstance() {
+		if (self::$instance === NULL) self::$instance = new self();
+		return self::$instance;
+	} 
+}
 ```
 
 ### HTTP相关
