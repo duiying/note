@@ -1020,6 +1020,24 @@ $sid = session_id();
 
 
 ### Linux相关
+如何找出文本中含有'abc'的行,如何统计共有多少行
+***
+```
+[root@VM_12_22_centos /]# cat 1.txt
+linux fdjalfd
+fjdlsfjdlal linux linux fdlaj
+fdjaljf
+fdjal
+fdjal linuxlinuxfjdla
+fjadl
+[root@VM_12_22_centos /]# cat 1.txt | grep 'linux'
+linux fdjalfd
+fjdlsfjdlal linux linux fdlaj
+fdjal linuxlinuxfjdla
+[root@VM_12_22_centos /]# cat 1.txt | grep 'linux' | wc -l
+3
+```
+
 如何显示文本文件头/尾部的M行
 ***
 ```
