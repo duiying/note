@@ -488,6 +488,47 @@ Example: objectTransmit.php
 ![objectTransmit](https://raw.githubusercontent.com/duiying/note/master/img/objectTransmit.png)
 
 ### PHP函数相关
+PHP中字符串截取的函数有哪些?
+***
+```
+substr
+mb_substr
+使用mb_substr要现在php.ini总开启extension=php_mbstring.dll
+二者不同在于substr按照字节截取,mb_substr指定编码之后,可以按照字符截取
+```
+```
+<?php
+/**
+ * 字符串截取函数
+ */
+
+// string substr ( string $string , int $start [, int $length ] )
+
+$str = 'abcdefg';
+// cdefg 不指定length默认到字符串的结尾
+echo substr($str, 2);
+// cde
+echo substr($str, 2, 3);
+// ab start=0表示从第一个字符开始
+echo substr($str, 0, 2);
+// fg start为负数表示从字符串结尾的位置开始
+echo substr($str, -2);
+// cdef length为负数表示到字符串结尾的位置
+echo substr($str, 2, -1);
+// ef
+echo substr($str, -3, -1);
+
+// string mb_substr ( string $str , int $start [, int $length = NULL [, string $encoding = mb_internal_encoding() ]] )
+// $encoding：$encoding 参数为字符编码,如果省略,则使用内部字符编码
+$str = '今天天气不错hello';
+// 今
+echo substr($str, 0, 3);
+// 今
+echo mb_substr($str, 0, 3);
+// 今天天气不错h
+echo mb_substr($str, 0, 7, 'utf-8');
+```
+
 在PHP中error_reporting()这个函数有什么作用?
 ***
 ```
@@ -550,6 +591,64 @@ Example: array_merge_recursive.php
 ```
 ![array_merge_recursive_res](https://raw.githubusercontent.com/duiying/note/master/img/array_merge_recursive_res.png)
 ### 面向对象相关
+什么是面向对象?面向对象的三大特性
+***
+```
+面向对象是把解决的问题按照一定规则划分成一个或多个对象,然后通过调用对象的方法来解决问题
+面向过程是把解决的问题划分成几个步骤,然后用函数将这些步骤一一实现,使用的时候调用函数
+
+三大特性: 封装 继承 多态
+封装: 定义类的时候将类中属性私有化,私有属性只能在本类中访问,为了让外界访问,需要提供public修饰的方法比如getXxx和setXxx
+封装的好处在于隐藏实现细节,对类外部提供访问方法,提高安全性
+
+继承: 在一个现有类的基础上去构建一个新的类,新的类称作子类,现有类被称为父类,子类会自动拥有父类所有可继承的属性和方法(public和protected)
+语法结构： 
+class 父类名{} 
+class 子类名 extends 父类名{}
+继承的好处在于提高了代码复用性
+注意: 子类继承的方法和属性的访问权限不能低于父类对应方法和属性的访问权限,比如下面这样是错误的
+class Animal
+{
+	protected $name;
+}
+
+class Dog extends Animal
+{
+	private $name;
+}
+Dog类中的name属性的访问权限只能是大于等于protected,也就是public和protected,不能低于protected
+
+多态: 一个类被多个子类继承,如果这个类的某个方法被多个子类表现不同的功能,这种行为称为多态,即多态是同一个东西不同形态的展示
+多态实现必须满足三个条件: 子类继承父类/子类重写父类方法/父类引用指向子类对象
+* Example
+<?php
+
+abstract class Animal
+{
+	abstract function say();
+}
+
+class Dog extends Animal
+{
+	function say() {echo 'wangwang';}
+}
+
+class Cat extends Animal
+{
+	function say() {echo 'miaomiao';}
+}
+
+// PHP的类型约束只存在于函数的形参
+function work(Animal $a)
+{
+	$a->say();
+}
+
+// 父类引用指向子类对象
+work(new Dog()); // wangwang
+work(new Cat()); // miaomiao
+```
+
 描述出PHP类中的常见魔术方法(最少5个)
 ***
 ```
@@ -1138,6 +1237,33 @@ TIME+ 累计CPU占用时间
 COMMAND 命令名/命令行
 ```
 ### MySQL相关
+一张雇员表employee,一张部门表department,结构如下,写出建表语句
+***
+id|emp_name|dept_id
+--|--|--|--|--
+1|张三|1
+2|李四|1
+3|王五|2
+
+id|dept_name
+--|--|--|--
+1|售前
+2|客服
+3|开发
+```
+
+```
+如果要查询出如下结果,请写出sql语句  
+
+id|dept_name|num
+--|--|--|--|--
+1|售前|2
+2|客服|1
+3|开发|0
+```
+
+```
+
 表的约束有哪些
 ***
 ```
@@ -1293,4 +1419,6 @@ MySQL索引有哪些
 
 ```
 
-面向对象 抽象类和接口之间区别 设计模式了解哪些,单例模式的实现思路 抽象类能否定义非抽象方法 访问权限有哪些 面向对象的特性是什么,应用 魔术方法有哪些 用过哪些 mysql数组函数尽可能的多说  说一下常用的排序算法,,冒泡/插入/快排怎么实现,时间复杂度如何 trait了解吗 composer具体的命令用过哪些  函数重载 self和$this的区别
+面向对象 抽象类和接口之间区别 设计模式了解哪些,抽象类能否定义非抽象方法 访问权限有哪些 面向对象的特性是什么,应用 魔术方法有哪些 用过哪些 mysql数组函数尽可能的多说  说一下常用的排序算法,,冒泡/插入/快排怎么实现,时间复杂度如何 trait了解吗 composer具体的命令用过哪些  函数重载 self和$this的区别 
+
+docker如何进入仓库 elasticsearch的query和filter 快排 10个牛奶 几个小鼠可以找到有毒的牛奶 http中有mac协议吗 二叉树 前是xxx 后是xxx 中是什么? sql书写 一个dept 一个employee 写出建表语句和查询语句 软连接 怎么关掉php-fpm进程 十六进制转成十进制 说出尽可能多地linux命令 ctrontab每隔一分钟 每隔五分钟 月尾 yii框架 laravel框架 写出php连接数据库的操作 写出时间复杂度logn 单例模式 php安全和性能了解吗 sql注入 redis如何防止登录过快?五次怎么设计 队列用过吗 mvc的认识 docker如何进入仓库 vim如何删除10行 进入文件末尾 如何删除一行并进入行头 
