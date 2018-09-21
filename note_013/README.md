@@ -1237,6 +1237,13 @@ TIME+ 累计CPU占用时间
 COMMAND 命令名/命令行
 ```
 ### MySQL相关
+写出PHP如何连接MySQL
+***
+```
+
+
+```
+
 一张雇员表employee,一张部门表department,结构如下,写出建表语句
 ***
 id|emp_name|dept_id
