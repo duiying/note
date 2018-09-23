@@ -1119,6 +1119,48 @@ $sid = session_id();
 
 
 ### Linux相关
+将/data目录链接到当前用户的家目录
+***
+硬链接不支持目录,只能使用软链接
+```
+[root@VM_12_22_centos data]# ln -s /data ~
+[root@VM_12_22_centos ~]# ll
+lrwxrwxrwx 1 root root 5 Sep 23 11:01 data -> /data
+
+或者指定目标目录名
+[root@VM_12_22_centos data]# ln -s /data ~/mydata
+[root@VM_12_22_centos ~]# ll
+lrwxrwxrwx 1 root root 6 Sep 23 10:36 mydata -> /data
+```
+理解软链接和硬链接
+```
+linux链接分为两种: 硬链接(Hard Link) 和 符号链接(Symbolic Link)又称为软链接
+软链接: ln -s 源文件 目标文件
+硬链接: ln 源文件 目标文件 
+
+索引节点(inode)又称i节点: linux系统为每个文件或者目录分配索引节点的编号inode,通过inode找到文件的具体物理存储位置,简单理解为指针
+硬链接: 硬链接通过索引节点进行连接,多个文件名指向同一索引节点,同一索引节点指向的是同一文件
+软链接: 本质是新建一个文件,保存原文件的路径名,相当于快捷方式,因此新建文件和原文件的inode是不同的
+
+软链接和硬链接的区别
+硬链接不支持为目录创建硬链接,但软链接可以
+
+[root@VM_12_22_centos data]# touch 1.txt
+[root@VM_12_22_centos data]# ln 1.txt ying.txt
+[root@VM_12_22_centos data]# ln -s 1.txt ruan.txt
+[root@VM_12_22_centos data]# ll
+-rw-r--r-- 2 root root    2 Sep 23 10:42 1.txt
+lrwxrwxrwx 1 root root    5 Sep 23 10:44 ruan.txt -> 1.txt
+-rw-r--r-- 2 root root    2 Sep 23 10:42 ying.txt
+
+由此可见,硬链接目标文件和原文件创建时间相同,硬链接相当于给目标文件创建一个副本,硬链接的作用是允许一个文件拥有多个有效路径名,防止误删文件
+软链接目标文件和原文件创建时间不同,目标文件相当于一个快捷方式
+
+硬链接和软链接中对目标文件的修改都会在原文件中保持同步
+删除原文件,硬链接目标文件不受影响;删除硬链接目标文件,原文件不受影响
+删除原文件,软链接目标文件成为断链(没有链接对象);删除软链接目标文件,原文件不受影响
+```
+
 如何找出文本中含有'abc'的行,如何统计共有多少行
 ***
 ```
@@ -1361,7 +1403,20 @@ id|dept_name
 2|客服
 3|开发
 ```
+* employee表
+CREATE TABLE `employee` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `emp_name` varchar(255) NOT NULL DEFAULT '',
+  `dept_id` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+* department表
+CREATE TABLE `department` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `dept_name` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 如果要查询出如下结果,请写出sql语句  
 
@@ -1371,7 +1426,19 @@ id|dept_name|num
 2|客服|1
 3|开发|0
 ```
-
+SELECT
+	dept.id,
+	dept.dept_name,
+	(
+		SELECT
+			count(emp.id)
+		FROM
+			employee emp
+		WHERE
+			emp.dept_id = dept.id
+	) AS num
+FROM
+	department dept;
 ```
 
 表的约束有哪些
@@ -1531,4 +1598,4 @@ MySQL索引有哪些
 
 面向对象 抽象类和接口之间区别 设计模式了解哪些,抽象类能否定义非抽象方法 访问权限有哪些 面向对象的特性是什么,应用 魔术方法有哪些 用过哪些 mysql数组函数尽可能的多说  说一下常用的排序算法,,冒泡/插入/快排怎么实现,时间复杂度如何 trait了解吗 composer具体的命令用过哪些  函数重载 self和$this的区别 
 
-docker如何进入仓库 elasticsearch的query和filter 快排 10个牛奶 几个小鼠可以找到有毒的牛奶 http中有mac协议吗 二叉树 前是xxx 后是xxx 中是什么? sql书写 一个dept 一个employee 写出建表语句和查询语句 软连接 怎么关掉php-fpm进程 十六进制转成十进制 说出尽可能多地linux命令 ctrontab每隔一分钟 每隔五分钟 月尾 yii框架 laravel框架 写出php连接数据库的操作 写出时间复杂度logn 单例模式 php安全和性能了解吗 sql注入 redis如何防止登录过快?五次怎么设计 队列用过吗 mvc的认识 docker如何进入仓库 vim如何删除10行 进入文件末尾 如何删除一行并进入行头 
+docker如何进入仓库 elasticsearch的query和filter 快排 10个牛奶 几个小鼠可以找到有毒的牛奶 http中有mac协议吗 二叉树 前是xxx 后是xxx 中是什么? sql书写 一个dept 一个employee 写出建表语句和查询语句 软连接 怎么关掉php-fpm进程 十六进制转成十进制 说出尽可能多地linux命令 ctrontab每隔一分钟 每隔五分钟 月尾 yii框架 laravel框架 写出时间复杂度logn php安全和性能了解吗 sql注入 redis如何防止登录过快?五次怎么设计 队列用过吗 mvc的认识 docker如何进入仓库 vim如何删除10行 进入文件末尾 如何删除一行并进入行头 
