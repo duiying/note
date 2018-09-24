@@ -143,3 +143,15 @@ https://github.com/duiying/test
 然后点击 Check 按钮, Packagist 会去检测此仓库地址的代码是否符合 Composer 的 Package 包的要求
 检测正常的话,会出现 Submit 按钮,再点击一下 Submit 按钮,我们的包就提交到 Packagist 上了
 ```
+### 通过github钩子实现github自动推送代码到packagist
+当我们更新github仓库时,Packagist上面的包可能更新不及时,我们可以通过github服务钩子来实现将代码实时更新到packagist
+```
+点击github仓库主页的 Settings -> Integrations & services -> Add service 搜索Packagist
+
+User填Packagist.org的用户名
+Token填https://packagist.org/profile/里面的Your API token
+Domain填https://packagist.org/
+
+然后添加,成功后点击Edit,点击页面右上角Test service,显示Okay, the test payload is on its way.则说明测试成功
+测试成功即说明,当我们往github提交代码时,代码会实时更新到packagist应用商店
+```
