@@ -1,0 +1,25 @@
+{
+    "name": "duiying/ComposerFrame",
+    "description": "使用Composer构建简易的PHP框架",
+    "type": "project",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "wyx",
+            "email": "1822581649@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "gregwar/captcha": "dev-master"
+    },
+    "autoload": {
+        "files": [
+            "core/function.php"
+        ],
+        "psr-4": {
+            "core\\": "core",
+            "web\\": "web"
+        }
+    }
+}

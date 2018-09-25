@@ -143,7 +143,7 @@ https://github.com/duiying/test
 然后点击 Check 按钮, Packagist 会去检测此仓库地址的代码是否符合 Composer 的 Package 包的要求
 检测正常的话,会出现 Submit 按钮,再点击一下 Submit 按钮,我们的包就提交到 Packagist 上了
 ```
-### 通过github钩子实现github自动推送代码到packagist
+### 通过github服务钩子实现github自动推送代码到packagist
 当我们更新github仓库时,Packagist上面的包可能更新不及时,我们可以通过github服务钩子来实现将代码实时更新到packagist
 ```
 点击github仓库主页的 Settings -> Integrations & services -> Add service 搜索Packagist
@@ -155,3 +155,94 @@ Domain填https://packagist.org/
 然后添加,成功后点击Edit,点击页面右上角Test service,显示Okay, the test payload is on its way.则说明测试成功
 测试成功即说明,当我们往github提交代码时,代码会实时更新到packagist应用商店
 ```
+### 使用composer的自动加载机制实现简易PHP框架
+准备工作
+```
+新建目录ComposerFrame作为项目根目录
+在ComposerFrame目录下新建index.php作为框架单一入口文件
+
+*index.php
+<?php
+define('ROOT_PATH', __DIR__);
+include 'vendor/autoload.php';
+core\Bootstrap::run();
+```
+生成一个空的composer项目
+```
+在ComposerFrame目录下新建composer.json文件
+
+* composer.json
+{
+    "name": "duiying/ComposerFrame",
+    "description": "使用Composer构建简易的PHP框架",
+    "type": "project",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "wyx",
+            "email": "1822581649@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
+
+在控制台下进入ComposerFrame目录,执行 composer install
+执行完成之后会在ComposerFrame目录下生成vendor目录
+```
+编辑composer.json文件,实现自动加载
+```
+* composer.json
+{
+    "name": "duiying/ComposerFrame",
+    "description": "使用Composer构建简易的PHP框架",
+    "type": "project",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "wyx",
+            "email": "1822581649@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "core/function.php"
+        ],
+        "psr-4": {
+            "core\\": "core",
+            "web\\": "web"
+        }
+    }
+}
+
+* composer.json文件说明
+files通常作为函数库的载入方式(而非类库)
+psr-4实现对指定目录下的类文件的自动加载
+"core\\": "core" 前面的core是指命名空间,后面的core是指目录
+
+保存composer.json文件,在控制台下进入ComposerFrame目录,执行 composer dump-autoload 来使自动加载生效
+```
+使用composer引入第三方验证码类库
+```
+在控制台下进入ComposerFrame目录,执行 composer require gregwar/captcha
+执行完成之后,发现composer.json的require发生了变化
+"require": {
+        "gregwar/captcha": "dev-master"
+ }
+ 同时vendor目录下也多了目录
+
+访问地址: http://localhost/ComposerFrame/index.php?s=Index/code
+```
+
+
+
+
+
+
+
+
+
+
+
