@@ -69,6 +69,15 @@ Git分支管理策略
 
 ```
 ### PHP基础相关
+echo,print,print_r的区别
+***
+```
+echo,print是语言结构,可以加括号也可以不加,比如 echo 1; 或者 echo(1); 都是可以的
+echo和print可以打印四种标量(布尔型/字符串/整型/浮点型)
+echo可以一次打印多个字符串,print一次只能打印一个,但是echo打印多个字符串的时候不能加括号
+print_r是函数,可以打印四种标量和两种复合数据类型(数组和对象)
+```
+
 写一个函数,能够遍历一个文件夹下的所有文件和子文件夹
 ***
 ```
@@ -1598,4 +1607,4 @@ MySQL索引有哪些
 
 面向对象 抽象类和接口之间区别 设计模式了解哪些,抽象类能否定义非抽象方法 访问权限有哪些 面向对象的特性是什么,应用 魔术方法有哪些 用过哪些 mysql数组函数尽可能的多说  说一下常用的排序算法,,冒泡/插入/快排怎么实现,时间复杂度如何 trait了解吗 composer具体的命令用过哪些  函数重载 self和$this的区别 
 
-docker如何进入仓库 elasticsearch的query和filter 快排 10个牛奶 几个小鼠可以找到有毒的牛奶 http中有mac协议吗 二叉树 前是xxx 后是xxx 中是什么? sql书写 一个dept 一个employee 写出建表语句和查询语句 软连接 怎么关掉php-fpm进程 十六进制转成十进制 说出尽可能多地linux命令 ctrontab每隔一分钟 每隔五分钟 月尾 yii框架 laravel框架 写出时间复杂度logn php安全和性能了解吗 sql注入 redis如何防止登录过快?五次怎么设计 队列用过吗 mvc的认识 docker如何进入仓库 vim如何删除10行 进入文件末尾 如何删除一行并进入行头 
+docker如何进入仓库 elasticsearch的query和filter 快排 10个牛奶 几个小鼠可以找到有毒的牛奶 http中有mac协议吗 二叉树 前是xxx 后是xxx 中是什么? sql书写 一个dept 一个employee 写出建表语句和查询语句 怎么关掉php-fpm进程 十六进制转成十进制 说出尽可能多地linux命令 ctrontab每隔一分钟 每隔五分钟 月尾 yii框架 laravel框架 写出时间复杂度logn php安全和性能了解吗 sql注入 redis如何防止登录过快?五次怎么设计 队列用过吗 mvc的认识 docker如何进入仓库 vim如何删除10行 进入文件末尾 如何删除一行并进入行头 
