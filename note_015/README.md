@@ -33,7 +33,20 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "dos"
 ```
 ### Eclipse中配置maven
 Eclipse中内置了maven,把Eclipse中内置默认的maven修改为我们本地安装的maven  
-![eclipsemaven](https://raw.githubusercontent.com/duiying/note/master/img/eclipsemaven.png)
+![eclipsemaven](https://raw.githubusercontent.com/duiying/note/master/img/eclipsemaven.png)  
 修改User settings,把Eclipse中内置默认的User settings修改为我们本地安装的User settings  
-![usersetting](https://raw.githubusercontent.com/duiying/note/master/img/usersetting.png)
+![usersetting](https://raw.githubusercontent.com/duiying/note/master/img/usersetting.png)  
 settings.xml文件路径修改完成之后,点击Update Settings和Reindex
+### renren-fast后端部署
+参考官方文档 https://www.renren.io/guide
+```
+* 下载
+    git clone https://gitee.com/renrenio/renren-fast.git
+* 导入
+    右键->Import->Existing Maven Projects
+创建数据库 renren_fast ,数据库编码为 UTF-8
+执行 db/mysql.sql 文件,初始化数据
+修改 application-dev.yml ,更新数据源1和数据源2的MySQL账号和密码
+运行 io.renren.RenrenApplication.java 的 main 方法，则可启动项目
+```
+访问Swagger路径：http://localhost:8080/renren-fast/swagger/index.html
