@@ -32,5 +32,8 @@ Default locale: zh_CN, platform encoding: GBK
 OS name: "windows 10", version: "10.0", arch: "amd64", family: "dos"
 ```
 ### Eclipse中配置maven
-Eclipse中内置了maven,我们修改Eclipse中内置默认的maven为我们本地安装的maven  
+Eclipse中内置了maven,把Eclipse中内置默认的maven修改为我们本地安装的maven  
 ![eclipsemaven](https://raw.githubusercontent.com/duiying/note/master/img/eclipsemaven.png)
+修改User settings,把Eclipse中内置默认的User settings修改为我们本地安装的User settings  
+![usersetting](https://raw.githubusercontent.com/duiying/note/master/img/usersetting.png)
+settings.xml文件路径修改完成之后,点击Update Settings和Reindex
