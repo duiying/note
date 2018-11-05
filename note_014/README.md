@@ -63,6 +63,11 @@ https://getcomposer.org/Composer-Setup.exe
 C:\Users\wyx>composer -V
 Composer version 1.7.2 2018-08-16 16:57:12
 ```
+### 切换为中国镜像
+```
+* 在Windows或Linux下的终端执行
+composer config -g repo.packagist composer https://packagist.phpcomposer.com
+```
 ### 创建composer.json文件以及在packagist.org中提交项目
 创建composer.json文件
 ```
