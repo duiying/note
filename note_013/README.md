@@ -601,6 +601,47 @@ Example: array_merge_recursive.php
 ![array_merge_recursive_res](https://raw.githubusercontent.com/duiying/note/master/img/array_merge_recursive_res.png)
 ### 面向对象相关
 
+self和$this的区别
+***
+```
+最主要的区别是self代表的是类,$this代表的是对象
+静态成员是给类调用的,不是给$this调用的
+
+类外部
+访问const(常量)或static(静态)修饰的成员,必须使用 :: 操作符, 除此之外的成员必须使用操作符 ->
+
+类内部
+访问const(常量)或static(静态)修饰的成员,必须使用 self:: 操作符, 除此之外的成员必须使用操作符 $this
+```
+```
+* Example
+<?php
+
+class Animal
+{
+	public $name = 'Animal';
+	public static $age = 10;
+
+	public function myPrint()
+	{
+		echo $this->name;	// Animal
+		echo self::$age;	// 10
+		echo $this::$age;	// 10 特殊用法: 允许使用$this::$age 替代 self::$age
+	}
+}
+
+// 类的外部访问
+// 10
+echo Animal::$age;
+$animal = new Animal();
+// Animal
+echo $animal->name;
+
+// 类的内部访问
+// Animal 10 10 
+$animal->myPrint();
+```
+
 权限修饰符有哪些?
 ***
 ```
