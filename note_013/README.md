@@ -600,6 +600,56 @@ Example: array_merge_recursive.php
 ```
 ![array_merge_recursive_res](https://raw.githubusercontent.com/duiying/note/master/img/array_merge_recursive_res.png)
 ### 面向对象相关
+
+权限修饰符有哪些?
+***
+```
+权限修饰符可以用在类的属性和方法(属性和方法统称为类的成员),用来控制类的成员的访问权限
+权限修饰符一共有三种
+public (公共的) : 任何地方都可以访问
+protected (受保护的) : 本类内部和子类内部可以访问,类的外部不可以访问
+private (私有的) : 只能本类内部可以访问
+```
+```
+* Example
+<?php
+
+class Animal
+{
+	public $name = 'Animal';
+	protected $age = 0;
+	private $sex = '';
+}
+
+class Dog extends Animal
+{
+	function shout()
+	{
+		echo $this->age;
+	}
+}
+
+$animal = new Animal();
+// Animal
+echo $animal->name;
+// 类外部不能访问
+// echo $animal->age;
+// 类外部不能访问
+// echo $animal->sex;
+
+$dog = new Dog();
+// Animal
+echo $dog->name;
+// 类外部不能访问
+// echo $dog->age;
+// 私有属性不能继承
+// echo $dog->sex;
+// 0
+$dog->shout();
+```
+
+
+
 什么是面向对象?面向对象的三大特性
 ***
 ```
@@ -1605,6 +1655,6 @@ MySQL索引有哪些
 
 ```
 
-面向对象 抽象类和接口之间区别 设计模式了解哪些,抽象类能否定义非抽象方法 访问权限有哪些 面向对象的特性是什么,应用 魔术方法有哪些 用过哪些 mysql数组函数尽可能的多说  说一下常用的排序算法,,冒泡/插入/快排怎么实现,时间复杂度如何 trait了解吗 composer具体的命令用过哪些  函数重载 self和$this的区别 
+面向对象 抽象类和接口之间区别 设计模式了解哪些,抽象类能否定义非抽象方法  mysql数组函数尽可能的多说  说一下常用的排序算法,,冒泡/插入/快排怎么实现,时间复杂度如何 trait了解吗 composer具体的命令用过哪些  函数重载 self和$this的区别 
 
 docker如何进入仓库 elasticsearch的query和filter 快排 10个牛奶 几个小鼠可以找到有毒的牛奶 http中有mac协议吗 二叉树 前是xxx 后是xxx 中是什么? sql书写 一个dept 一个employee 写出建表语句和查询语句 怎么关掉php-fpm进程 十六进制转成十进制 说出尽可能多地linux命令 ctrontab每隔一分钟 每隔五分钟 月尾 yii框架 laravel框架 写出时间复杂度logn php安全和性能了解吗 sql注入 redis如何防止登录过快?五次怎么设计 队列用过吗 mvc的认识 docker如何进入仓库 vim如何删除10行 进入文件末尾 如何删除一行并进入行头 
