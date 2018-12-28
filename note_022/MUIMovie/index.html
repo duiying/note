@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+    
+    <style>
+    	/*去除底部tab选项的顶部border*/
+    	.mui-bar-tab{border-top:1px solid #fff;}
+    	
+    	/*去除顶部nav的阴影效果*/
+    	.mui-bar-nav{
+    		-webkit-box-shadow: none;
+    		box-shadow: none;
+    	}
+    </style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+　　　　<h1 id="title" class="mui-title">热映</h1>
+　　</header>
+	
+	<nav class="mui-bar mui-bar-tab" style="background-color: #F7F7F7;">
+		<a id="defaultTab" class="mui-tab-item mui-active" href="html/main-hot.html">
+			<span class="mui-icon mui-icon-home"></span>
+			<span class="mui-tab-label">热映</span>
+		</a>
+		<a class="mui-tab-item" href="html/main-list.html">
+			<span class="mui-icon mui-icon-search"></span>
+			<span class="mui-tab-label">榜单</span>
+		</a>
+		<a class="mui-tab-item" href="html/mian-setting.html">
+			<span class="mui-icon mui-icon-gear"></span>
+			<span class="mui-tab-label">设置</span>
+		</a>
+	</nav>
+	
+	
+</body>
+
+<script type="text/javascript">
+	var subpages = ['html/main-hot.html', 'html/main-list.html', 'html/mian-setting.html'];
+        var subpage_style = {
+            top: '45px',
+            bottom: '51px'
+        };
+            
+        var aniShow = {};
+            
+        // 创建子页面,首个选项卡页面显示,其他选项卡页面隐藏
+        mui.plusReady(function() {
+            var self = plus.webview.currentWebview();
+            for (var i = 0; i < 3; i++) {
+                var temp = {};
+                var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+                if (i > 0) {
+                    sub.hide();
+                }
+                self.append(sub);
+            }
+        });
+         // 当前激活选项
+        var activeTab = subpages[0];
+        var title = document.getElementById("title");
+        // 选项卡点击事件
+        mui('.mui-bar-tab').on('tap', 'a', function(e) {
+            var targetTab = this.getAttribute('href');
+                
+            if (targetTab == activeTab) {
+                return;
+            }
+            //更换标题
+            title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
+            //显示目标选项卡
+            //若为iOS平台或非首次显示，则直接显示
+            if(mui.os.ios||aniShow[targetTab]){
+                plus.webview.show(targetTab);
+            }else{
+                //否则，使用fade-in动画，且保存变量
+                var temp = {};
+                temp[targetTab] = "true";
+                mui.extend(aniShow,temp);
+                plus.webview.show(targetTab,"fade-in",300);
+            }
+            //隐藏当前;
+            plus.webview.hide(activeTab);
+            //更改当前活跃的选项卡
+            activeTab = targetTab;
+    });
+</script>
+
+</html>

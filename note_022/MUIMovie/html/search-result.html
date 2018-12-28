@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../css/mui.min.css" rel="stylesheet" />
+	
+	<style>
+		/*设置背景颜色为白色*/
+    	html,body{background-color: #FFF;}
+    	/*设置mui-content的背景颜色*/
+    	.mui-content{background: #FFF;}
+    	/*通用样式*/
+    	.dark-big{color: #333; font-size: 16px;}
+    	.dark-medium{color: #333; font-size: 14px;}
+    	.dark-micro{color: #333; font-size: 10px;}
+    	.gray-medium{color: #A2A2A2; font-size: 14px;}
+    	.gray-small{color: #A2A2A2; font-size: 12px;}
+    	.gray-micro{color: #A2A2A2; font-size: 10px;}
+    	.orange-small{color: #F79709; font-size: 12px;}
+	</style>
+</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">"{{name}}"的搜索结果</h1>
+	</header>
+	
+	<div class="mui-content">
+	    <div id="refreshContainer" class="mui-scroll-wrapper" style="top: 50px;">
+			<div class="mui-scroll">
+				<ul id="movies" class="mui-table-view">
+					<li class="mui-table-view-cell" v-for="item in movies" @tap="openDetail(item)">
+						<img class="mui-pull-left" style="width: 60px;height: 90px;margin-right: 10px;" :src="item.cover" />
+						<div class="mui-ellipsis dark-big">
+							{{item.title}}
+						</div>
+						<div class="mui-ellipsis">
+							<span class="gray-small">{{item.genres}}</span>&nbsp;
+							<span v-if="item.score>0" class="orange-small">{{item.score}}分</span>
+							<span v-else class="orange-small">暂无评分</span>
+						</div>
+						<div class="mui-ellipsis gray-small">
+							导演：{{item.directors}}
+						</div>
+						<div class="mui-ellipsis gray-small">
+							主演：{{item.casts}}
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	    
+	</div>
+</body>
+<script src="../js/mui.min.js"></script>
+<script src="../js/vue.min.js"></script>
+<script type="text/javascript">
+	mui.init();
+	
+	var data_movies = new Vue({
+		el:'#movies',
+		data:{
+			movies:[]
+		}
+	});
+	
+	var search_name = new Vue({
+		el:'.mui-title',
+		data:{
+			name : ''
+		}
+	});
+	
+	mui.init({
+		swipeBack : true, 
+	  	pullRefresh : {
+		    container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+		    
+		    // 上拉加载
+		    up : {
+		      	height:50,//可选.默认50.触发上拉加载拖动距离
+		      	auto:true,//可选,默认false.自动上拉加载一次
+		      	contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+		      	contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+		      	callback :loadMoreData //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+		    }
+	  	}
+	});
+	
+	// 通过mui.preload()方法预加载,可立即返回对应webview的引用,但一次仅能预加载一个页面;
+	// 若需加载多个webview,则需多次调用mui.preload()方法;
+	// 预加载电影详情页面
+	var detailPage;
+	var name;
+	mui.plusReady(function(){
+		detailPage = mui.preload({
+			url:'./detail.html',
+		    id:'detail' //默认使用当前页面的url作为id
+		});
+		
+		name = plus.webview.currentWebview().name;
+		search_name.name = name;
+	});
+	
+	// 打开电影详情页面
+  	function openDetail(item) {
+  		// 触发详情页面的movieId事件
+  		mui.fire(detailPage, 'movieId', {
+  			id : item.id
+  		});
+  		// 打开新页面
+  		mui.openWindow({
+  			id : 'detail' // preload中定义的id
+  		});
+  	}
+	
+	// 上拉加载
+	function loadMoreData() {
+		// 请求豆瓣热映列表接口
+		mui.getJSON('http://api.douban.com/v2/movie/search?q='+name,{
+			start : data_movies.movies.length,
+			count: 10
+		},function(data){
+			
+			// 添加新的元素
+			data_movies.movies = data_movies.movies.concat(convert(data.subjects));
+			
+			// 没有更多内容
+     		mui('#refreshContainer').pullRefresh().endPullupToRefresh(data.subjects.length == 0);
+     		
+     		
+		});
+	}
+	
+	// 数据转换
+	function convert(items) {
+		var newItems = [];
+		
+		// 遍历items
+		items.forEach(function(item){
+			// 如果 item.genres = ['剧情', '喜剧'] 
+			// 那么 item.genres.toString() = 剧情,喜剧
+			// 那么 item.genres.toString().replace(/,/g, ' / ') = 剧情 / 喜剧
+			// /g是执行全局匹配, 而不是在找到第一个匹配后停止
+			var genres = item.genres.toString().replace(/,/g, ' / ');
+			
+			// 导演
+			var directors = '';
+			for (var i = 0; i < item.directors.length; i++) {
+				directors += item.directors[i].name;
+				
+				if (i != item.directors.length - 1) {
+					directors += ' / ';
+				}
+			}
+			
+			// 演员
+			var casts = '';
+			for (var i = 0; i < item.casts.length; i++) {
+				casts += item.casts[i].name;
+				
+				if (i != item.casts.length - 1) {
+					casts += ' / ';
+				}
+			}
+			
+			// push() 方法可向数组的末尾添加一个或多个元素
+			newItems.push({
+				id : item.id,
+				title : item.title,
+				genres : genres,
+				cover : item.images.large,
+				score : item.rating.average,
+				directors : directors,
+				casts : casts
+			});
+		});
+		
+		return newItems;
+	}
+	
+</script>
+</html>

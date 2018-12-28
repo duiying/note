@@ -1,0 +1,54 @@
+{
+  "index.html": {
+    "resources": [
+      "html/main-hot.html"
+    ],
+    "refer": [
+      "html/main-list.html",
+      "html/main-hot.html",
+      "html/mian-setting.html"
+    ]
+  },
+  "html/main-hot.html": {
+    "refer": [
+      "html/detail.html",
+      "html/search.html"
+    ]
+  },
+  "html/detail.html": {
+    "refer": [
+      "html/cast-detail.html"
+    ]
+  },
+  "html/main-list.html": {
+    "refer": [
+      "html/top250.html",
+      "html/american.html"
+    ]
+  },
+  "html/top250.html": {
+    "refer": [
+      "html/detail.html"
+    ]
+  },
+  "html/american.html": {
+    "refer": [
+      "html/detail.html"
+    ]
+  },
+  "html/cast-detail.html": {
+    "refer": [
+      "html/detail.html"
+    ]
+  },
+  "html/search.html": {
+    "refer": [
+      "html/search-result.html"
+    ]
+  },
+  "html/mian-setting.html": {
+    "refer": [
+      "html/aboutus.html"
+    ]
+  }
+}

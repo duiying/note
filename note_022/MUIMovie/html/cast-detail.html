@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<link href="../css/mui.min.css" rel="stylesheet" />
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/vue.min.js"></script>
+	<style type="text/css">
+		/*设置背景颜色为白色*/
+    	html,body{background-color: #FFF;}
+    	.mui-content{background-color: #FFF;}
+    	
+    	/*去除顶部nav的阴影效果*/
+    	.mui-bar-nav{
+    		-webkit-box-shadow: none;
+    		box-shadow: none;
+    	}
+    	
+    	/*通用样式*/
+    	.dark-big{color: #333; font-size: 16px;}
+    	.dark-medium{color: #333; font-size: 14px;}
+    	.dark-micro{color: #333; font-size: 10px;}
+    	.gray-medium{color: #A2A2A2; font-size: 14px;}
+    	.gray-small{color: #A2A2A2; font-size: 12px;}
+    	.gray-micro{color: #A2A2A2; font-size: 10px;}
+    	.orange-small{color: #F79709; font-size: 12px;}
+    	
+    	/*顶部样式*/
+    	.top-image-block{
+			text-align: center;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			background: #18D7D7;
+		}
+	</style>
+</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav">
+    	<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    	<h1 class="mui-title">演员详情</h1>
+	</header>
+	
+	<div class="mui-content">
+		<div class="top-image-block">
+			<img :src="cover" alt="" style="width: 160px; height: 240px; vertical-align: top;" />
+		</div>
+		
+		<div style="padding: 15px;">
+			<div class="dark-big">
+				{{name}}				
+			</div>
+			<div class="gray-medium">
+				{{enName}}				
+			</div>
+			<div class="gray-small">
+				个人简介
+			</div>
+			<div class="dark-medium">
+				{{summary}}
+			</div>
+		</div>
+		
+		<div class="gray-small" style="padding-left: 15px;">
+			代表作品			
+		</div>
+		<div style="overflow-x: auto; white-space: nowrap; padding-left: 15px;">
+			<div style="display: inline-block;" v-for="item in works">
+				<img :src="item.subject.images.medium" alt="" style="width: 70px; height: 100px; margin-right: 10px;" />
+				<div class="dark-micro mui-ellipsis" style="width: 70px; text-align: center;">
+					{{item.subject.title}}
+				</div>
+				<div class="orange-small mui-ellipsis" style="width: 70px; text-align: center; line-height: 15px;">{{item.subject.rating.average}}分</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</body>
+<script type="text/javascript">
+	mui.init();
+	
+	function getDefaultData() {
+		return {
+			name : '',
+			enName : '',
+			cover : '',
+			summary : '',
+			works : []
+		};
+	}
+	
+	// vue
+	var data_detail = new Vue({
+		el : '.mui-content',
+		data : getDefaultData(),
+		methods : {
+			
+			// 重置数据
+			resetData : function() {
+				Object.assign(this.$data, getDefaultData());
+			}
+		}
+	});
+	
+	mui.plusReady(function(){
+		
+		var self = plus.webview.currentWebview();
+		
+		// 添加hide事件, 滚动最顶部
+		self.addEventListener('hide', function(e){
+			window.scrollTo(0, 0);
+			data_detail.resetData();
+		}, false);
+		
+		// 开启loading
+		plus.nativeUI.showWaiting('加载中', {
+			width : '100px',
+			height : '100px'
+		});
+		
+		// 获取接口数据
+		mui.getJSON('https://api.douban.com/v2/movie/celebrity/'+self.castId, function(resp){
+			data_detail.name = resp.name;
+			data_detail.enName = resp.name_en;
+			data_detail.cover = resp.avatars.large;
+			data_detail.summary = resp.name + ', ' + resp.gender + ', ' + resp.born_place;
+			data_detail.works = resp.works;
+			
+			// 关闭loading
+			plus.nativeUI.closeWaiting();
+		});
+	});
+	
+</script>
+</html>

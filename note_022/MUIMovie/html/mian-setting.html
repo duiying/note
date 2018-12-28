@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    
+    
+    <style type="text/css">
+    	/*设置背景颜色为白色*/
+    	html,body{background-color: #FFF;}
+    	/*控制toast位置*/
+    	.mui-toast-container {bottom: 50% !important;}
+    	
+    	/*通用样式*/
+    	.dark-big{color: #333; font-size: 16px;}
+    	.dark-medium{color: #333; font-size: 14px;}
+    	.dark-micro{color: #333; font-size: 10px;}
+    	.gray-medium{color: #A2A2A2; font-size: 14px;}
+    	.gray-small{color: #A2A2A2; font-size: 12px;}
+    	.gray-micro{color: #A2A2A2; font-size: 10px;}
+    	.orange-small{color: #F79709; font-size: 12px;}
+    </style>
+</head>
+<body>
+	<div class="mui-content">
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right dark-big">意见反馈</a>
+			</li>
+			<li id="cache" class="mui-table-view-cell">
+				<a class="mui-navigate-right dark-big">清除缓存</a>
+			</li>
+			<li id="about" class="mui-table-view-cell">
+				<a class="mui-navigate-right dark-big">关于我们</a>
+			</li>
+		</ul>
+	</div>
+</body>
+<script type="text/javascript" charset="utf-8">
+  	mui.init();
+  	
+  	mui.plusReady(function(){
+  		// 给清除缓存添加点击事件
+  		mui('#cache')[0].addEventListener('tap', function(){
+			plus.cache.clear(function(){
+				plus.storage.setItem('history','');
+				mui.toast('清除成功',{type:'div'});
+			});
+		});
+		
+		// 给关于我们添加点击事件
+		mui('#about')[0].addEventListener('tap', function(){
+				mui.openWindow({
+					id: 'about',
+					url: './aboutus.html'
+				})
+		});
+  	});
+</script>
+
+</html>
