@@ -81,6 +81,8 @@ CentOS Linux release 7.5.1804 (Core)
 * docker rmi <image name> --通过镜像名称来删除指定镜像
     # 删除PHP镜像(image name最好写全)
     docker rmi docker.io/php
+    # 删除所有镜像
+    docker rmi $(docker images -q)
 ```
 
 容器生命周期管理
