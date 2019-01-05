@@ -2,7 +2,7 @@
 
 ```
 * 编辑hosts文件
-    vi /etc/hosts
+    sudo vi /etc/hosts
 * 查看指定端口是否被占用,比如3306
     lsof -i:3306
 ```
