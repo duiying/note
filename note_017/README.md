@@ -42,6 +42,14 @@ git add
 ```
 git commit -m "说明信息"
 ```
+取回远程主机某个分支的更新, 再与本地指定分支合并
+```
+# git pull <远程主机名> <远程分支名>:<本地分支名>
+# 比如: 取回origin主机的testing分支, 与本地的feature-wangyaxian-post分支合并
+git pull origin testing:feature-wangyaxian-post
+# 省略本地分支名, 表示与当前分支合并
+git pull origin testing
+```
 撤销修改
 ```
 场景1: 当你改乱了工作区某个文件的内容,想直接丢弃工作区的修改时,用命令 git checkout -- file
@@ -90,7 +98,16 @@ f31ceb8 (HEAD -> master) HEAD@{7}: commit (initial): first init
 $ git reset --hard dd1974a
 HEAD is now at dd1974a second commit
 ```
-
+### 新增文件并推送到远程
+```
+[root@VM_12_22_centos demo]# echo "hello" >> hello.txt
+[root@VM_12_22_centos demo]# git add hello.txt 
+[root@VM_12_22_centos demo]# git commit -m "add a file"
+# git push <远程主机名> <本地分支名>:<远程分支名>
+[root@VM_12_22_centos demo]# git push origin master:master
+# 如果省略远程分支名, 表示将本地的feature-wangyaxian-post分支推送到origin主机的feature-wangyaxian-post分支, 如果该远程分支不存在则会被新建
+git push origin feature-wangyaxian-post
+```
 ### 生成 SSH KEY
 ```
 # -t 参数表示秘钥类型是rsa, -C参数提供一个用来识别秘钥的注释(不一定填邮箱,可以是任何内容,邮箱只是识别用的key)
@@ -114,13 +131,6 @@ cat /root/.ssh/id_rsa.pub
 # 克隆完成之后, 当前目录下会新增一个目录
 [root@VM_12_22_centos git]# ls
 demo
-
-# 新增文件并推送到远程
-[root@VM_12_22_centos demo]# echo "hello" >> hello.txt
-[root@VM_12_22_centos demo]# git add hello.txt 
-[root@VM_12_22_centos demo]# git commit -m "add a file"
-# git push 远程主机名 本地分支名:远程分支名
-[root@VM_12_22_centos demo]# git push origin master:master
 ```
 ### 标签管理
 ```
