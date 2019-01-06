@@ -1,5 +1,9 @@
 # MacOS使用技巧
-
+- 软件集合
+```
+FTP: FileZilla
+```
+- 使用技巧
 ```
 * 编辑hosts文件
     sudo vi /etc/hosts

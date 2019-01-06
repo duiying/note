@@ -24,3 +24,4 @@
 - [MacOS使用技巧](note_023)
 - [Vim使用技巧](note_024)
 - [Yii2 API](note_025)
+- [网址收藏](note_026)
