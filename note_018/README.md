@@ -13,3 +13,19 @@
 * 安装其他常用软件
     yum -y install wget gcc gcc-c++ git
 ```
+
+### 如何关闭防火墙
+```
+* 关闭防火墙
+    systemctl stop firewalld
+* 开机禁用防火墙
+    systemctl disable firewalld
+```
+### 如何关闭selinux
+```
+* 编辑配置文件
+    vim /etc/sysconfig/selinux
+* 将 SELINUX=enforcing 改为 SELINUX=disabled
+* 重启服务器
+    reboot
+```
