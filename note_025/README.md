@@ -33,7 +33,7 @@ server {
     listen 80;
     # listen [::]:80 default_server ipv6only=on;
 
-    server_name amin.yii2.com;
+    server_name admin.yii2.com;
     root /data/www/yii2-adminlte/backend/web;
     index index.php index.html index.htm;
 

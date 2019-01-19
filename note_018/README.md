@@ -10,4 +10,6 @@
     yum -y install net-tools
 * 安装vim
     yum -y install vim
+* 安装其他常用软件
+    yum -y install wget gcc gcc-c++ git
 ```
