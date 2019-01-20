@@ -28,3 +28,5 @@
 - [ssh命令登录远程主机](note_027)
 - [Git多分支协作](note_028)
 - [error集合](note_029)
+- [Linux命令](note_030)
+- [Jenkins的介绍与安装](note_031)
