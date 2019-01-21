@@ -16,8 +16,8 @@ Job为配置单位与日志管理, 使运维与开发人员能够协同工作
 强大的负载均衡功能, 保证项目的可靠性
 ```
 
-**Jenkins的安装与配置**
-[Vmware安装Centos7.5初始化操作](https://github.com/duiying/note/blob/master/note_018)
+**Jenkins的安装与配置**  
+[Vmware安装Centos7.5初始化操作](https://github.com/duiying/note/blob/master/note_018)  
 **安装步骤**
 ```
 # 安装Java(需要1.8及以上)
@@ -62,3 +62,26 @@ java    2177 deploy  162u  IPv6  27305      0t0  TCP *:webcache (LISTEN)
 
 # 至此, Jenkins安装并启动成功
 ```
+
+**更改hosts**  
+```
+sudo vi /etc/hosts
+192.168.2.143 jenkins.example.com
+```
+**浏览器访问**  
+```
+http://jenkins.example.com:8080
+```
+
+**初始化界面**  
+![jenkins-init](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-init.png)  
+**开始界面**  
+![jenkins-start](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-start.png)  
+**正在安装插件界面**  
+![jenkins-starting](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-starting.png)  
+**创建第一个admin用户界面**  
+![jenkins-admin](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-admin.png)  
+**URL配置界面**  
+![jenkins-url](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-url.png)  
+**ready界面**  
+![jenkins-ready](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-ready.png)  
