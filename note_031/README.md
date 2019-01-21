@@ -17,5 +17,48 @@ Job为配置单位与日志管理, 使运维与开发人员能够协同工作
 ```
 
 **Jenkins的安装与配置**
-初始化操作
+[Vmware安装Centos7.5初始化操作](https://github.com/duiying/note/blob/master/note_018)
+**安装步骤**
+```
+# 安装Java(需要1.8及以上)
+[root@localhost ~]# yum install -y java
+# 查看Java版本
+[root@localhost ~]# java -version
+openjdk version "1.8.0_191"
+OpenJDK Runtime Environment (build 1.8.0_191-b12)
+OpenJDK 64-Bit Server VM (build 25.191-b12, mixed mode)
 
+# 安装Jenkins
+[root@localhost ~]# wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+
+[root@localhost ~]# rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+[root@localhost ~]# yum install -y jenkins
+
+# 创建Jenkins服务用户
+[root@localhost ~]# useradd deploy
+# 更改Jenkins启动用户和查看端口
+[root@localhost ~]# vim /etc/sysconfig/jenkins
+29行左右 JENKINS_USER="jenkins" 改为 JENKINS_USER="deploy"
+56行左右查看Jenkins端口 JENKINS_PORT="8080"
+[root@localhost ~]# cp /etc/sysconfig/jenkins{,.bak}
+# 更改目录权限
+[root@localhost ~]# chown -R deploy:deploy /var/lib/jenkins
+[root@localhost ~]# chown -R deploy:deploy /var/log/jenkins
+# 启动Jenkins
+[root@localhost ~]# systemctl start jenkins
+# 查看8080端口, 发现没有被占用, 说明Jenkins启动失败
+[root@localhost ~]# lsof -i:8080
+# 查看Jenkins日志
+[root@localhost ~]# cat /var/log/jenkins/jenkins.log
+java.io.FileNotFoundException: /var/cache/jenkins/war/META-INF/MANIFEST.MF (Permission denied)
+# 给deploy赋予目录权限
+[root@localhost ~]# chown -R deploy:deploy /var/cache/jenkins/
+# 重启Jenkins
+[root@localhost ~]# systemctl start jenkins
+[root@localhost ~]# lsof -i:8080
+COMMAND  PID   USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+java    2177 deploy  162u  IPv6  27305      0t0  TCP *:webcache (LISTEN)
+
+# 至此, Jenkins安装并启动成功
+```
