@@ -85,3 +85,5 @@ http://jenkins.example.com:8080
 ![jenkins-url](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-url.png)  
 **ready界面**  
 ![jenkins-ready](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-ready.png)  
+**首页界面**  
+![jenkins-index](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-index.png)  
