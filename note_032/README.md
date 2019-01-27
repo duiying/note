@@ -56,6 +56,8 @@ ssh root@192.168.2.155
 ![jenkins-first-freestyle](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-first-freestyle.png)  
 添加参数  
 ![jenkins-param-build](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-param-build.png)  
+回到jenkins首页, 点击 test-freestyle-job configure  
+![jenkins-freestyle-configure](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-freestyle-configure.png)   
 
 
 
