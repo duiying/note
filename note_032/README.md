@@ -103,3 +103,10 @@ Build
 ### 添加一个pipeline Job
 回到首页, 点击 New 任务  
 ![jenkins-new-pipeline](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-new-pipeline.png)  
+添加描述信息  
+![jenkins-pipeline-desc](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-pipeline-desc.png)  
+
+
+
+
+
