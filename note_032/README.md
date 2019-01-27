@@ -171,7 +171,10 @@ pipeline {
 credentialsId:"xxx"  
 ![copy-credential](https://raw.githubusercontent.com/duiying/note/master/img/copy-credential.png)    
 url: 'xxx' 改成自己的gitlab repo url  
- 
+然后点击save, 立即构建, 发现报错  
+![jenkins-pipeline-error](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-pipeline-error.png)    
+查看Console Output错误输出信息  
+![jenkins-error-log](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-error-log.png)      
 
 
 
