@@ -177,5 +177,85 @@ url: 'xxx' 改成自己的gitlab repo url
 ![jenkins-error-log](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-error-log.png)      
 提示没有找到对应的参数, 所以点击Build With Parameters  
 ![jenkins-pipeline-param-build](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-pipeline-param-build.png)   
-
-
+查看Console Output输出信息  
+```
+Started by user admin
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/test-pipeline-job
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage (hide)
+[Pipeline] { (Checkout test repo)
+[Pipeline] sh
++ git config --global http.sslVerify false
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/test-pipeline-job
+[Pipeline] {
+[Pipeline] git
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://gitlab.example.com/root/test.git # timeout=10
+Fetching upstream changes from https://gitlab.example.com/root/test.git
+ > git --version # timeout=10
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --progress https://gitlab.example.com/root/test.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision ded2f292daf54351a4cee588225f570be9dab481 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f ded2f292daf54351a4cee588225f570be9dab481
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D master # timeout=10
+ > git checkout -b master ded2f292daf54351a4cee588225f570be9dab481
+Commit message: "Merge branch 'feature-wangyaxian' into 'master'"
+ > git rev-list --no-walk ded2f292daf54351a4cee588225f570be9dab481 # timeout=10
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Print env variable)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/test-pipeline-job
+[Pipeline] {
+[Pipeline] sh
++ echo '[INFO] Print env variable'
+[INFO] Print env variable
++ echo 'Current deployment environment is dev'
++ echo 'The build is 1.0.0'
++ echo '[INFO] Done...'
+[INFO] Done...
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Check test properties)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/test-pipeline-job
+[Pipeline] {
+[Pipeline] sh
++ echo '[INFO] Check test properties'
+[INFO] Check test properties
++ '[' -s test.properties ']'
++ cat test.properties
+Current deployment environment is dev
+The build is 1.0.0
++ echo '[INFO] Done...'
+[INFO] Done...
+[Pipeline] echo
+[INFO] Build finished...
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+```
+至此pipeline job构建成功
