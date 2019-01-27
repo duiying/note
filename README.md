@@ -30,3 +30,5 @@
 - [error集合](note_029)
 - [Linux命令](note_030)
 - [Jenkins的介绍与安装](note_031)
+- [Jenkins Freestyle Job 和 Pipeline Job 的构建流程](note_032)
+- [Jenkins pipeline编写规范](note_033)
