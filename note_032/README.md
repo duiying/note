@@ -69,5 +69,30 @@ ssh root@192.168.2.155
 ![jenkins-code-management](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-code-management.png)  
 build配置 执行shell
 ![jenkins-build-shell](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-build-shell.png)  
+```
+#!/bin/sh
 
+export PATH="/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin"
 
+# Print env variable
+echo "[INFO] Print env variable"
+echo "Current deployment envrionment is $deploy_env" >> test.properties
+echo "THe build is $version" >> test.properties
+echo "[INFO] Done..."
+
+# Check test properties
+echo "[INFO] Check test properties"
+if [ -s test.properties ]
+then
+  cat test.properties
+  echo "[INFO] Done..."
+else
+  echo "test.properties is empty"
+fi
+
+echo "[INFO] Build finished..."
+```
+点击save, 然后Build with Parameters  
+![jenkins-build-param](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-build-param.png)  
+Build  
+![jenkins-build](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-build.png)  
