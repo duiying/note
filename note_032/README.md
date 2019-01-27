@@ -176,6 +176,6 @@ url: 'xxx' 改成自己的gitlab repo url
 查看Console Output错误输出信息  
 ![jenkins-error-log](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-error-log.png)      
 提示没有找到对应的参数, 所以点击Build With Parameters  
-![jenkins-pipeline-param](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-pipeline-param.png)   
+![jenkins-pipeline-param-build](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-pipeline-param-build.png)   
 
 
