@@ -98,8 +98,8 @@ Build
 ![jenkins-build](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-build.png)  
 查看Console Output输出信息  
 ![jenkins-console-output](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-console-output.png)  
-可以看到已经成功构建  
 ![jenkins-freestyle-success](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-freestyle-success.png)  
+至此, freestyle job构建成功
 ### 添加一个pipeline Job
 回到首页, 点击 New 任务  
 ![jenkins-new-pipeline](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-new-pipeline.png)  
@@ -258,4 +258,4 @@ The build is 1.0.0
 [Pipeline] End of Pipeline
 Finished: SUCCESS
 ```
-至此pipeline job构建成功
+至此, pipeline job构建成功
