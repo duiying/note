@@ -51,6 +51,8 @@ ssh root@192.168.2.155
 
 ### 添加一个freestyle Job
 ![jenkins-new-job](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-new-job.png)  
+![jenkins-new-job-name](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-new-job-name.png)  
+
 
 ```
 
