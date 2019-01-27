@@ -60,7 +60,11 @@ ssh root@192.168.2.155
 ![jenkins-freestyle-configure](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-freestyle-configure.png)   
 查看gitlab repo地址 
 ![gitlab-repo-url](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-repo-url.png)   
-
+在gitlab ssh keys 添加jenkins主机的秘钥
+```
+[root@localhost ~]# cat /root/.ssh/id_rsa.pub 
+```
+![gitlab-add-key](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-add-key.png)   
 
 
 ```
