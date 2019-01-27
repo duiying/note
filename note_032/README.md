@@ -67,8 +67,7 @@ ssh root@192.168.2.155
 ![gitlab-add-key](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-add-key.png)   
 添加仓库地址, 选择root  
 ![jenkins-code-management](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-code-management.png)  
-```
-
-```
+build配置 执行shell
+![jenkins-build-shell](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-build-shell.png)  
 
 
