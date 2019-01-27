@@ -100,3 +100,6 @@ Build
 ![jenkins-console-output](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-console-output.png)  
 可以看到已经成功构建  
 ![jenkins-freestyle-success](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-freestyle-success.png)  
+### 添加一个pipeline Job
+回到首页, 点击 New 任务  
+![jenkins-new-pipeline](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-new-pipeline.png)  
