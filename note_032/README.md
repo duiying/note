@@ -54,6 +54,7 @@ ssh root@192.168.2.155
 ![jenkins-new-job-name](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-new-job-name.png)  
 
 
+
 ```
 
 ```

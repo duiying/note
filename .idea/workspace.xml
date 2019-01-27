@@ -20,12 +20,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="md" value="815" />
+          <entry key="md" value="819" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="815" />
+          <entry key="Markdown" value="819" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -46,8 +46,8 @@
         <entry file="file://$PROJECT_DIR$/note_032/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="320">
-                <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+              <first_editor relative-caret-position="364">
+                <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
               </first_editor>
               <second_editor />
             </state>
@@ -156,12 +156,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1548576483277</updated>
-      <workItem from="1548576485890" duration="2443000" />
+      <workItem from="1548576485890" duration="2476000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2443000" />
+    <option name="totallyTimeSpent" value="2476000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="127" y="60" width="1920" height="993" extended-state="0" />
@@ -224,8 +224,8 @@
     <entry file="file://$PROJECT_DIR$/note_032/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="320">
-            <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
+          <first_editor relative-caret-position="364">
+            <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
           </first_editor>
           <second_editor />
         </state>
