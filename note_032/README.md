@@ -1,4 +1,4 @@
-# Jenkins Job构建
+# Jenkins Freestyle Job 和 Pipeline Job 的构建流程
 > Jenkins Job 介绍  
 ```
 代表一个任务或者项目
