@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a170ec22-83f7-40cb-873e-ae66cdad2f8e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/note_032/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/note_032/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,12 +21,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="md" value="850" />
+          <entry key="md" value="895" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="850" />
+          <entry key="Markdown" value="895" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -49,7 +50,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="254">
-                <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+                <caret line="56" column="6" lean-forward="true" selection-start-line="56" selection-start-column="6" selection-end-line="56" selection-end-column="6" />
               </first_editor>
               <second_editor />
             </state>
@@ -89,7 +90,7 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="127" />
     <option name="y" value="60" />
     <option name="width" value="1920" />
@@ -163,24 +164,24 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1548576483277</updated>
-      <workItem from="1548576485890" duration="2856000" />
+      <workItem from="1548576485890" duration="3212000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2856000" />
+    <option name="totallyTimeSpent" value="3212000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="127" y="60" width="1920" height="993" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1315229" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1315229" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.32963374" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32963374" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -235,7 +236,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="254">
-            <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+            <caret line="56" column="6" lean-forward="true" selection-start-line="56" selection-start-column="6" selection-end-line="56" selection-end-column="6" />
           </first_editor>
           <second_editor />
         </state>

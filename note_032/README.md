@@ -54,8 +54,8 @@ ssh root@192.168.2.155
 ![jenkins-new-job-name](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-new-job-name.png)  
 填写描述信息  
 ![jenkins-first-freestyle](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-first-freestyle.png)  
-
-
+添加参数  
+![jenkins-param-build](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-param-build.png)  
 
 
 
