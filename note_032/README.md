@@ -58,6 +58,8 @@ ssh root@192.168.2.155
 ![jenkins-param-build](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-param-build.png)  
 回到jenkins首页, 点击 test-freestyle-job configure  
 ![jenkins-freestyle-configure](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-freestyle-configure.png)   
+查看gitlab repo地址 
+![gitlab-repo-url](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-repo-url.png)   
 
 
 

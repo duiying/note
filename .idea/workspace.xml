@@ -20,12 +20,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="md" value="970" />
+          <entry key="md" value="1017" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="970" />
+          <entry key="Markdown" value="1017" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -48,8 +48,8 @@
         <entry file="file://$PROJECT_DIR$/note_032/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="342">
-                <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+              <first_editor relative-caret-position="364">
+                <caret line="61" column="17" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
               </first_editor>
               <second_editor />
             </state>
@@ -163,12 +163,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1548576483277</updated>
-      <workItem from="1548576485890" duration="3590000" />
+      <workItem from="1548576485890" duration="3882000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3590000" />
+    <option name="totallyTimeSpent" value="3882000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="127" y="60" width="1920" height="993" extended-state="0" />
@@ -234,8 +234,8 @@
     <entry file="file://$PROJECT_DIR$/note_032/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="342">
-            <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+          <first_editor relative-caret-position="364">
+            <caret line="61" column="17" selection-start-line="61" selection-start-column="17" selection-end-line="61" selection-end-column="17" />
           </first_editor>
           <second_editor />
         </state>
