@@ -98,3 +98,5 @@ Build
 ![jenkins-build](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-build.png)  
 查看Console Output输出信息  
 ![jenkins-console-output](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-console-output.png)  
+可以看到已经成功构建  
+![jenkins-freestyle-success](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-freestyle-success.png)  
