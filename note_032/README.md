@@ -65,8 +65,8 @@ ssh root@192.168.2.155
 [root@localhost ~]# cat /root/.ssh/id_rsa.pub 
 ```
 ![gitlab-add-key](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-add-key.png)   
-
-
+添加仓库地址, 选择root  
+![jenkins-code-management](https://raw.githubusercontent.com/duiying/note/master/img/jenkins-code-management.png)  
 ```
 
 ```
