@@ -32,3 +32,5 @@
 - [Jenkins的介绍与安装](note_031)
 - [Jenkins Freestyle Job 和 Pipeline Job 的构建流程](note_032)
 - [Jenkins pipeline编写规范](note_033)
+- [Ansible 简介和安装步骤](note_034)
+- [Ansible Playbook 初探](note_035)
