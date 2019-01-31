@@ -1,0 +1,7 @@
+[servers]
+test.example.com
+
+[servers:vars]
+server_name=test.example.com
+user=root
+output=/root/test.txt

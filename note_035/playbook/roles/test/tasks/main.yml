@@ -1,0 +1,2 @@
+- name: Print server name and user to remote testbox
+  shell: "echo 'Currently {{ user }} is loggging {{ server_name }}' > {{ output }}"
