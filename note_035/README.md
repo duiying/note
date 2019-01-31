@@ -20,7 +20,10 @@ ansible-playbook 2.5.14 (stable-2.5 465b848985) last updated 2019/01/31 16:23:20
 ```
 
 > 编写playbook  
-
+```
+(.py3-a2.5-env) [deploy@localhost ~]$ ls
+playbook
+```
   
 目录结构
 ```
@@ -52,7 +55,7 @@ main.yml
 - shell 使用shell模块
 ```
 - name: Print server name and user to remote testbox
-  shell:"echo 'Currently {{ user }} is loggging {{ server_name }}' > {{ output }}"
+  shell: "echo 'Currently {{ user }} is loggging {{ server_name }}' > {{ output }}"
 ```
 deploy.yml
 - hosts 目标主机列表
@@ -66,4 +69,41 @@ deploy.yml
   roles:
     - test
 ```
- 
+> 配置SSH免秘钥认证  
+
+Ansible主机
+```
+# 编辑hosts文件
+[root@localhost ~]# su
+[root@localhost ~]# vim /etc/hosts
+192.168.2.157 test.example.com
+# 切换到deploy用户
+[root@localhost ~]# su - deploy
+# 生成rsa秘钥(一路回车)
+[deploy@localhost ~]$ ssh-keygen -t rsa
+# 将本地的秘钥复制到目标主机
+[deploy@localhost ~]$ ssh-copy-id -i /home/deploy/.ssh/id_rsa.pub root@test.example.com
+# 使用ssh连接目标主机, 此时不需要输入密码
+[deploy@localhost ~]$ ssh root@test.example.com
+```
+> 执行playbook  
+
+```
+# 执行命令
+(.py3-a2.5-env) [deploy@localhost playbook]$ ansible-playbook -i inventory/host ./deploy.yml 
+
+PLAY [servers] ********************************************************************************
+
+TASK [Gathering Facts] ************************************************************************
+ok: [test.example.com]
+
+TASK [test : Print server name and user to remote testbox] ************************************
+changed: [test.example.com]
+
+PLAY RECAP ************************************************************************************
+test.example.com           : ok=2    changed=1    unreachable=0    failed=0   
+# 在目标主机中查看文件内容
+(.py3-a2.5-env) [deploy@localhost playbook]$ ssh root@test.example.com cat /root/test.txt
+Currently root is loggging test.example.com
+```
+至此, 可以发现已经成功地在远程被部署主机test.example.com上创建了一个test.txt文件, 且文件内容和预先设置的相同
