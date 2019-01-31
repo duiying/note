@@ -44,6 +44,7 @@
 - [Jenkins pipeline编写规范](note_033)
 - [Ansible 简介和安装步骤](note_034)
 - [Ansible Playbook 初探](note_035)
+- [Ansible Playbook 常用模块](note_036)
 
 > 前端  
 - [JS脚本模拟阿里程序员抢月饼](note_021)

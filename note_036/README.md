@@ -67,7 +67,7 @@ main.yml
 - name 任务名称
 - shell 使用shell模块
 ```
-- name: Print server name and user to remote testbox
+- name: Print server name and user to remote test
   shell: "echo 'Currently {{ user }} is loggging {{ server_name }}' > {{ output }}"
 ```
 deploy.yml
@@ -331,3 +331,45 @@ deploy    15967  15963  7 22:00 ?        00:00:08 nginx: worker process
 ```
 
 ### 总结
+main.yml文件内容总结如下
+```
+- name: Print server name and user to remote test
+  shell: "echo 'Currently {{ user }} is loggging {{ server_name }}' > {{ output }}"
+
+# file
+- name: create a file
+  file: 'path=/root/wyx.txt state=touch mode=0755 owner=wyx group=wyx'
+
+# copy
+- name: copy a file
+  copy: 'remote_src=no src=/home/deploy/playbook/roles/test/files/wyx.sh dest=/root/wyx.sh mode=0644 force=yes'
+
+# stat
+- name: check if wyx.sh exists
+  stat: 'path=/root/wyx.sh'
+  register: script_stat
+
+# debug
+- debug: msg="wyx.sh exists"
+  when: script_stat.stat.exists
+
+# command
+- name: use command run the script
+  command: 'sh /root/wyx.sh'
+
+# shell
+- name: use shell run the script
+  shell: "echo 'test' > test.txt"
+
+# template
+- name: write the nginx config file
+  template: src=roles/test/templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+
+# packaging: 安装Nginx
+- name: ensure nginx is at the latest version
+  yum: pkg=nginx state=latest
+
+# service: 启动nginx
+- name: start nginx service
+  service: name=nginx state=started
+```
