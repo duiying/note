@@ -144,5 +144,29 @@ echo strtr($str, ['hello' => 'world', 'world' => 'hello']); // world hello
 echo str_replace(['hello', 'world'], ['world', 'hello'], $str); // hello hello
 
 4. 用yield实现协程
+
+5. 用[]定义数组
+
+6. 用 ** 进行幂运算(该方式比用函数的效率高)
+<?php
+echo 2 ** 3;
+echo pow(2, 3);
+
+7. 用 ... 定义变长参数函数
+<?php
+
+// 在函数调用时使用...
+function addAll1(...$nums)
+{
+    return array_sum($nums);
+}
+echo addAll1(1,2,3);
+
+function addAll2($num1, $num2, $num3)
+{
+    return $num1 + $num2 + $num3;
+}
+// 在函数调用时使用...
+echo addAll2(...[1,2,3]);
 ```
 
