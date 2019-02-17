@@ -2,6 +2,7 @@
 > PHP  
 - [PHP基础](note_013)
 - [error集合](note_029)
+- [PHP编码技巧](note_038)
 
 > Mysql  
 - [MySQL多表操作基础概念](note_004)

@@ -69,6 +69,30 @@ Git分支管理策略
 
 ```
 ### PHP基础相关
+写出下面语句的执行结果
+***
+```
+<?php
+
+echo "hello, \nhello" . PHP_EOL; // hello 换行 hello
+echo 'hello, \nhello' . PHP_EOL; // hello, \nhello
+
+echo "\101\102" . PHP_EOL; // AB
+echo "\x41\x42" . PHP_EOL; // AB
+echo '\101\102' . PHP_EOL; // \101\102
+echo '\x41\x42' . PHP_EOL; // \x41\x42
+
+echo "\\ \"" . PHP_EOL; // \ "
+echo '\\ \'' . PHP_EOL; // \ '
+```
+```
+考察单引号和双引号的区别
+双引号能解析变量, 单引号不能解析变量
+双引号能转义字符, 单引号不能转义字符, 但能解析\\ \'
+\[0-7]{1,3} 如果符合该正则, 双引号会以八进制方式进行解析出一个字符, 单引号则不作处理
+\x[0-9A-Fa-f]{1,2} 如果符合该正则, 双引号会以十六进制方式解析出一个字符, 单引号则不作处理
+```
+
 echo,print,print_r的区别
 ***
 ```
