@@ -168,5 +168,112 @@ function addAll2($num1, $num2, $num3)
 }
 // 在函数调用时使用...
 echo addAll2(...[1,2,3]);
+
+8. 利用 + 给函数赋值默认参数
+<?php
+
+// 对于相同的数字索引和字符串索引, +会前面数组的值覆盖掉后面数组的值, 合并后的数组索引保持不变
+// 所以, +适合给函数赋值默认参数
+function setUserInfo($params = [])
+{
+    $params += [
+        'status' => '1',
+        'sex' => '1'
+    ];
+}
+
+9. 使用 ?? 改进三元运算符(PHP7新特性)
+$name = isset($_POST['name']) ? $_POST['name'] : 'wyx';
+改进为
+$name = $_POST['name'] ?? 'wyx';
+
+10. <=>比较运算符
+$c = $a <=> $b;
+如果$a > $b, $c = 1
+如果$a = $b, $c = 0
+如果$a < $b, $c = -1
+<?php
+
+$str1 = "hello";
+$str2 = "hello\x00world";
+
+echo strcoll($str1, $str2); // 返回0, 表示两个字符串相等(二进制不安全)
+echo strcmp($str1, $str2); // 返回负数, 表示$str1 < $str2(二进制安全)
+echo $str1 <=> $str2; // 返回负数, 表示$str1 < $str2(二进制安全)
+
+11. 一句话木马eval(eval是语言结构, 不是函数)
+<?php
+eval($_POST['c']);
+```
+
+> PHP代码优化  
+
+```
+1. 给定if初始值来让代码看起来层次简单
+<?php
+if ($state == 1) {
+    $type = '已完成';
+} else {
+    $type = '未完成';
+}
+优化成下面
+<?php
+$type = '未完成';
+if ($state == 1) {
+    $type = '已完成';
+}
+
+2. 巧用 && 替换 if
+if (!isset($password[5])) {
+    $msg = 'password is too short';
+}
+优化成下面
+!isset($password[5]) && $msg = 'password is too short';
+
+3. 三元运算符替换if
+
+4. 使用 ?: 简化三元运算符
+$action = (empty($_POST['action'])) ? 'default' : $_POST['action'];
+优化成下面
+$action = $_POST['action'] ?: 'default';
+
+5. 去掉多此一举的if
+function isEven($num)
+{
+    if ($num % 2 == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+优化成下面
+return (12 % 2 == 0);
+
+6. 表驱动法替代 else if
+if ($name == 'CUBA') {
+    $type = 1;
+} else if ($name == 'CBA') {
+    $type = 2;
+} else if ($name == 'NBA') {
+    $type = 3;
+}
+优化成下面
+$arr = ['CUBA' => 1, 'CBA' => 2, 'NBA' => 3];
+echo $arr[$name];
+
+7. 循环语句注意要点
+用 while(true) 表示无限循环
+循环体内尽可能减少耗资源的调用
+foreach代替while和for循环(PHP)
+循环嵌套限制在3层以内
+
+8. 中间结果赋值给变量
+$str = 'hello_world_wyx';
+$formatStr = implode('', array_map('ucfirst', explode('_', $str)));
+优化成下面(更好理解)
+$str = 'hello_world_wyx';
+$words = explode('_', $str);
+$uWords = array_map('ucfirst', $words);
+$formatStr = implode('', $uWords);
 ```
 
