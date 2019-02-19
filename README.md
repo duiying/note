@@ -59,6 +59,10 @@
 - [MacOS使用技巧](note_023)
 - [网址收藏](note_026)
 
+> TODO
+- [yield](https://segmentfault.com/a/1190000012334856)
+- [PHP 5.3、5.4、5.5、5.6 中的新特性](https://segmentfault.com/a/1190000002790818#articleHeader34)
+
 
 
 

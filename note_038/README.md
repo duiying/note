@@ -275,5 +275,21 @@ $str = 'hello_world_wyx';
 $words = explode('_', $str);
 $uWords = array_map('ucfirst', $words);
 $formatStr = implode('', $uWords);
+
+9. 复杂的逻辑表达式做成布尔函数
+if (isset($_POST['name']) && $_POST['name'] == 'wyx' && isset($_POST['age']) && $_POST['age'] == 18) {
+    echo 'wyx is 18 years old';
+}
+优化成下面
+$wyx = (isset($_POST['name']) && $_POST['name'] == 'wyx');
+$age = (isset($_POST['age']) && $_POST['age'] == 18);
+if ($wyx && $age) {
+    echo 'wyx is 18 years old';
+}
+
+10. 永远不要复制粘贴雷同的代码
+相同的代码放一起让以后修改更轻松
+可以用全局的统计和过滤器实现(比如记录日志)
+可复用的带参函数是解决雷同代码的好方法
 ```
 
