@@ -1,6 +1,6 @@
 # Yii2
 
-> 安装  
+### 安装  
 
 ```
 # 全局配置镜像加速
@@ -16,7 +16,7 @@ php init
 # 浏览器访问
 ```
 
-> 配置数据库  
+### 配置数据库  
 
 ```
 # common/config/main-local.php
@@ -42,6 +42,62 @@ return [
     ],
 ];
 ```
+
+### 自定义允许访问Gii模块的IP
+
+```
+# frontend/config/main-local.php 
+# backend/config/main-local.php
+$config['modules']['gii'] = [
+    'class' => 'yii\gii\Module',
+    'allowedIPs' => ['127.0.0.1'],
+];
+# 浏览器访问 http://域名/index.php?r=gii
+```
+
+### 修改默认控制器  
+
+```
+# frontend/config/main.php
+# 在 'id' => 'app-frontend', 下面新增一行
+'defaultRoute' => 'index',
+
+# backend/config/main.php
+# 在 'id' => 'app-backend', 下面新增一行
+'defaultRoute' => 'index',
+```
+
+### Yii2整合AdminLTE后台主题
+
+```
+# 使用composer下载
+composer require dmstr/yii2-adminlte-asset "2.*"
+# 复制整个 vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app 目录下的 layouts 目录和 site 目录到 backend/views , 覆盖原始文件
+
+# 如何预览
+# backend/controllers/目录下新建IndexController.php
+<?php
+namespace backend\controllers;
+
+use Yii;
+use yii\web\Controller;
+
+/**
+ * Index controller
+ */
+class IndexController extends Controller
+{
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
+}
+# backend/views/目录下新建index目录, index目录下新建index.php
+<?php
+echo 'hello world';    
+```
+![Yii2-adminlte](https://raw.githubusercontent.com/duiying/note/master/img/Yii2-adminlte.png)  
+
 
 ### Nginx配置
 **frontend**
