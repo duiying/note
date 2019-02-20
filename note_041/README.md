@@ -57,6 +57,7 @@ total 4
 
 ### Leader处理开发人员提交的合并申请
 使用leader 12345678登录Gitlab, 登录之后提示设置新密码87654321  
+![gitlab-merge-info](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-merge-info.png)   
 
   
 
