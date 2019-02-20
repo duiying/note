@@ -60,7 +60,7 @@ total 4
 ![gitlab-merge-info](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-merge-info.png)   
 ![gitlab-confirm-merge](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-confirm-merge.png)   
 ![merge](https://raw.githubusercontent.com/duiying/note/master/img/merge.png)   
-  
+此时, 开发人员提交的merge申请已经合并到master分支  
 
 
 
