@@ -9,3 +9,6 @@
 ![access](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-access.png)  
 ![members](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-members.png)  
 ### 创建Leader账号
+![leader](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-leader.png)  
+**把leader账户加入到test工程**  
+![leader-members](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-leader-members.png)  
