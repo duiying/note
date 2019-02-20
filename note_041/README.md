@@ -51,5 +51,17 @@ total 4
 ### 开发人员提交合并申请  
 使用dev 12345678登录Gitlab, 登录之后提示设置新密码  
 ![gitlab-new-password](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-new-password.png)    
+进入到test仓库, 提交合并申请  
+![gitlab-merge-request](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-merge-request.png)    
+![gitlab-submit-merge](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-submit-merge.png)    
+
+### Leader处理开发人员提交的合并申请
+使用leader 12345678登录Gitlab, 登录之后提示设置新密码87654321  
+
+  
+
+
+
+
 
 
