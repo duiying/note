@@ -12,3 +12,6 @@
 ![leader](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-leader.png)  
 **把leader账户加入到test工程**  
 ![leader-members](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-leader-members.png)  
+### 更改dev和leader账户的密码
+![gitlab-edit](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-edit.png)  
+![gitlab-password](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-password.png)  
