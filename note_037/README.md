@@ -2,12 +2,12 @@
 
 ### Gitlab介绍
 
-> Gitlab简介
+### Gitlab简介
 
 - 概念: Ruby语言开发的开源分布式版本控制系统
 - 功能: 管理项目源代码/版本控制/代码复用和查找
 
-> Gitlab的优势  
+### Gitlab的优势  
 
 - 开源免费, 适合中小型公司将代码放置在该系统中
 - 差异化的版本管理, 离线同步以及强大的分支管理功能
@@ -15,7 +15,7 @@
 - 集成度很高, 能够集成绝大多数开发工具
 - 支持内置HA, 保证在高并发下仍旧高可用
 
-> Gitlab主要服务构成  
+### Gitlab主要服务构成  
 
 - Nginx 静态web服务器
 - Gitlab-webhorse 轻量级的反向代理服务器
@@ -24,7 +24,7 @@
 - Postgresql 数据库
 - Redis 缓存服务器
 
-> Gitlab的工作流程  
+### Gitlab的工作流程  
 
 - 创建并克隆项目
 - 创建项目分支
@@ -156,8 +156,10 @@ rewrite ^(.*)$ https://$host$1 permanent;
 ![Gitlab welcome](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-welcome.png)  
 创建测试项目  
 ![Gitlab create](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-create.png)  
-克隆项目(需要输入用户名root和密码12345678)  
+克隆项目(需要输入用户名root和密码12345678) 
+``` 
 $ git -c http.sslverify=false clone https://gitlab.example.com/root/test.git  
+```
 新建文件并推送到Gitlab服务器  
 ```
 wyx@DESKTOP-EHP4TTA MINGW64 ~/Desktop
@@ -191,6 +193,15 @@ To https://gitlab.example.com/root/test.git
  * [new branch]      master -> master
 
 ```
+### Gitlab后台运行状况
+进入后台  
+![Gitlab Admin](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-admin.png)  
+System Info  
+![System Info](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-sytem-info.png)  
+日志  
+![Gitlab Log](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-log.png)  
+健康检查  
+![Health Check](https://raw.githubusercontent.com/duiying/note/master/img/health-check.png)  
 
  
 
