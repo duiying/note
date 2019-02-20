@@ -152,4 +152,9 @@ rewrite ^(.*)$ https://$host$1 permanent;
 ```
 首次访问需要设置root用户的密码  
 ![Gitlab第一次访问](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-index.png)  
+使用root和12345678登录  
+![Gitlab welcome](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-welcome.png)  
+创建测试项目  
+![Gitlab create](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-create.png)  
+ 
 
