@@ -4,6 +4,7 @@
 - [error集合](note_029)
 - [PHP编码技巧](note_038)
 - [PHP坑人小题](note_039)
+- [yield(生成器) - PHP性能优化利器](note_040)
 
 > Mysql  
 - [MySQL多表操作基础概念](note_004)
@@ -61,7 +62,6 @@
 - [网址收藏](note_026)
 
 > TODO
-- [yield](https://segmentfault.com/a/1190000012334856)
 - [PHP 5.3、5.4、5.5、5.6 中的新特性](https://segmentfault.com/a/1190000002790818#articleHeader34)
 
 
