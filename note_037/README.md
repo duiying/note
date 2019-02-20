@@ -159,7 +159,38 @@ rewrite ^(.*)$ https://$host$1 permanent;
 克隆项目(需要输入用户名root和密码12345678)  
 $ git -c http.sslverify=false clone https://gitlab.example.com/root/test.git  
 新建文件并推送到Gitlab服务器  
+```
+wyx@DESKTOP-EHP4TTA MINGW64 ~/Desktop
+$ cd test/
 
+wyx@DESKTOP-EHP4TTA MINGW64 ~/Desktop/test (master)
+$ echo hello >> 1.txt
+
+wyx@DESKTOP-EHP4TTA MINGW64 ~/Desktop/test (master)
+$ git add .
+warning: LF will be replaced by CRLF in 1.txt.
+The file will have its original line endings in your working directory.
+
+wyx@DESKTOP-EHP4TTA MINGW64 ~/Desktop/test (master)
+$ git commit -m "first commit"
+[master (root-commit) 4c56cb6] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 1.txt
+
+wyx@DESKTOP-EHP4TTA MINGW64 ~/Desktop/test (master)
+$ git -c http.sslverify=false commit origin master
+error: pathspec 'origin' did not match any file(s) known to git.
+error: pathspec 'master' did not match any file(s) known to git.
+
+wyx@DESKTOP-EHP4TTA MINGW64 ~/Desktop/test (master)
+$ git -c http.sslverify=false push origin master
+Counting objects: 3, done.
+Writing objects: 100% (3/3), 206 bytes | 206.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://gitlab.example.com/root/test.git
+ * [new branch]      master -> master
+
+```
 
  
 
