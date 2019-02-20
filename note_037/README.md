@@ -197,11 +197,13 @@ To https://gitlab.example.com/root/test.git
 进入后台  
 ![Gitlab Admin](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-admin.png)  
 System Info  
-![System Info](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-sytem-info.png)  
+![System Info](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-system-info.png)  
 日志  
 ![Gitlab Log](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-log.png)  
 健康检查  
-![Health Check](https://raw.githubusercontent.com/duiying/note/master/img/health-check.png)  
+![Health Check](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-health-check.png)  
+
+### 
 
  
 
