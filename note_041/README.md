@@ -15,3 +15,41 @@
 ### 更改dev和leader账户的密码
 ![gitlab-edit](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-edit.png)  
 ![gitlab-password](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-password.png)  
+
+### 开发人员进行代码编写并提交
+```
+# 克隆
+[root@localhost ~]# git -c http.sslverify=false clone https://gitlab.example.com/root/test.git
+Cloning into 'test'...
+Username for 'https://gitlab.example.com': dev
+Password for 'https://dev@gitlab.example.com':
+
+# 进入仓库
+[root@localhost ~]# cd test/
+[root@localhost test]# ll
+total 4
+-rw-r--r-- 1 root root 6 Feb 21 05:02 1.txt
+
+# 创建新分支
+[root@localhost test]# git checkout -b feature-wangyaxian-post
+
+# 代码编辑
+[root@localhost test]# echo dev >> 1.txt
+
+# 设置用户名和邮箱
+[root@localhost test]# git config user.name "dev"
+[root@localhost test]# git config user.email "dev@example.com"
+
+# 代码推送
+[root@localhost test]# git add 1.txt
+[root@localhost test]# git commit -m "dev first commit"
+[root@localhost test]# git -c http.sslverify=false push origin feature-wangyaxian-post
+```
+此时, test仓库下多了一个分支  
+![gitlab-branch](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-branch.png)  
+
+### 开发人员提交合并申请  
+使用dev 12345678登录Gitlab, 登录之后提示设置新密码  
+![gitlab-new-password](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-new-password.png)    
+
+
