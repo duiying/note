@@ -49,6 +49,7 @@
 - [Ansible Playbook 初探](note_035)
 - [Ansible Playbook 常用模块](note_036)
 - [Gitlab的简介/安装/使用流程](note_037)
+- [Gitlab Developer和Leader的协作流程](note_041)
 
 > 前端  
 - [JS脚本模拟阿里程序员抢月饼](note_021)
