@@ -152,9 +152,14 @@ rewrite ^(.*)$ https://$host$1 permanent;
 ```
 首次访问需要设置root用户的密码  
 ![Gitlab第一次访问](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-index.png)  
-使用root和12345678登录  
+使用root和12345678登录, 进入欢迎页面    
 ![Gitlab welcome](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-welcome.png)  
 创建测试项目  
 ![Gitlab create](https://raw.githubusercontent.com/duiying/note/master/img/gitlab-create.png)  
+克隆项目(需要输入用户名root和密码12345678)  
+$ git -c http.sslverify=false clone https://gitlab.example.com/root/test.git  
+新建文件并推送到Gitlab服务器  
+
+
  
 
