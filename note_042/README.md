@@ -9,8 +9,8 @@
 4. 在项目的vendor目录中新建qqlogin目录, 将SDK包中相关文件和文件夹拷贝进去, 目录结构如下
 qqlogin
     class
-	comm
-	qqConnectAPI.php
+    comm
+    qqConnectAPI.php
 ```
 
 
