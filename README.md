@@ -5,6 +5,7 @@
 - [PHP编码技巧](note_038)
 - [PHP坑人小题](note_039)
 - [yield(生成器) - PHP性能优化利器](note_040)
+- [QQ登录实现流程](note_042)
 
 > Mysql  
 - [MySQL多表操作基础概念](note_004)
