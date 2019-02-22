@@ -8,3 +8,4 @@
 - [markdown在线转PDF](http://coolaf.com/tool/md)
 - [陈帅同学](http://imshuai.cn/)
 - [typecho - 一个简约的开源博客系统](http://typecho.org/)
+- [老张CMS博客 搭建开源博客系统](http://www.phplaozhang.com/)
