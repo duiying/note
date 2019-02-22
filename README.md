@@ -22,6 +22,7 @@
 - [Vim使用技巧](note_024)
 - [ssh命令登录远程主机](note_027)
 - [Linux命令](note_030)
+- [TP5 Nginx配置](note_043)
 
 > 缓存  
 - [redis](note_003)
