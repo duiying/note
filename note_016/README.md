@@ -7,6 +7,21 @@
     # 第2-4位表示属主权限
     # 第5-7位表示属组权限
     # 第8-10位表示其它用户权限
+
+# 返回到上一次的目录
+    cd -
+
+# 在PATH变量指定的路径中, 搜索某个系统命令的位置
+    # 查看bash命令的位置
+    which bash
+    which sh
+# bash 和 sh的区别
+[root@10-9-50-240 scripts]# which bash
+/usr/bin/bash
+[root@10-9-50-240 scripts]# which sh
+/usr/bin/sh
+[root@10-9-50-240 scripts]# ll /usr/bin/sh
+lrwxrwxrwx 1 root root 4 Aug 14  2018 /usr/bin/sh -> bash
     
 # 创建目录 
     mkdir 目录名

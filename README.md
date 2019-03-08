@@ -16,7 +16,7 @@
 > Linux  
 - [Vmware安装Centos7.3并搭建LNMP以及配置TP5.1](note_012)
 - [搭建java环境以及配置renren-fast开源项目](note_015)
-- [linux常用命令思维导图](note_016)  
+- [Linux常用命令](note_016)  
 - [Vmware安装Centos7.5初始化操作](note_018)
 - [如何关闭selinux](note_020)
 - [Vim使用技巧](note_024)
