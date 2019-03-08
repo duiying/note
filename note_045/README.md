@@ -1,6 +1,8 @@
 # shell
 
-- hello world   
+### shell特性
+> 第一个shell   
+
 vim ping.sh
 ```
 # Feat: ping baidu.com, 如果ping成功执行&&之后的语句, 如果ping失败执行||之后的语句
@@ -22,7 +24,8 @@ chmod +x ping.sh
 #!/usr/bin/bash
 ping -c1 baidu.com &> /dev/null && echo "baidu.com is up" || echo "baidu.com is down"
 ```
-- 如何在解释器为/usr/bin/bash的脚本中嵌套python脚本  
+> 如何在解释器为/usr/bin/bash的脚本中嵌套python脚本  
+
 首先查看python命令位置
 ```
 [root@10-9-50-240 scripts]# which python
@@ -46,7 +49,8 @@ print "python"
 @
 echo "hello bash"
 ```
-- 在当前shell执行和sub shell执行的区别  
+> 在当前shell执行和sub shell执行的区别  
+ 
 vim ping.sh
 ```
 #!/usr/bin/bash
