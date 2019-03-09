@@ -67,6 +67,17 @@ Composer version 1.7.2 2018-08-16 16:57:12
 ```
 * 在Windows或Linux下的终端执行
 composer config -g repo.packagist composer https://packagist.phpcomposer.com
+composer config -g repo.packagist composer https://packagist.laravel-china.org
+```
+### Error
+```
+[InvalidArgumentException]                                                    
+Could not find a version of package duiying/yii2-queue matching your minimum-stability (stable). Require it with
+an explicit version constraint allowing its desired stability.
+```
+```
+# 原因: 没有发布版本, 需要添加版本dev-master, -vvv可以输出命令执行日志
+composer require duiying/yii2-queue dev-master -vvv
 ```
 ### 创建composer.json文件以及在packagist.org中提交项目
 创建composer.json文件

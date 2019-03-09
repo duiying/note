@@ -106,7 +106,7 @@ if ($mailer->send()) {
 
 <p>您的找回密码链接如下：</p>
 
-<?php $url = Yii::$app->urlManager->createAbsoluteUrl(['admin/forget-pass', 'time' => $time, 'admin_name' => $admin_name, 'token' => $token]); ?>
+<?php $url = Yii::$app->urlManager->createAbsoluteUrl(['login/reset', 'time' => $time, 'admin_name' => $admin_name, 'token' => $token]); ?>
 <p><a href="<?php echo $url; ?>"><?php echo $url; ?></a></p>
 
 <p>该链接10分钟内有效，请勿传递给别人！</p>
