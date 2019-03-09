@@ -67,6 +67,53 @@ $config['modules']['gii'] = [
 'defaultRoute' => 'index',
 ```
 
+### 发送邮件
+```
+# 1. 配置
+# common/config/main-local.php
+'mailer' => [
+    'class' => 'yii\swiftmailer\Mailer',
+    'viewPath' => '@common/mail',
+    // send all mails to a file by default. You have to set
+    // 'useFileTransport' to false and configure a transport
+    // for the mailer to send real emails.
+    'useFileTransport' => false,
+    'transport' => [
+        'class' => 'Swift_SmtpTransport',
+        'host' => 'smtp.163.com',
+        'username' => '17725027209@163.com',
+        'password' => '密码',
+        'port' => '465',
+        'encryption' => 'ssl',
+    ],
+    'messageConfig' => [
+        'charset' => 'UTF-8',
+        'from' => ['17725027209@163.com' => 'admin']
+    ],
+],
+
+# 2. 控制器或模型
+$mailer = Yii::$app->mailer->compose('forget-pass', ['admin_name' => $this->admin_name, 'time' => $time, 'token' => $token]);
+$mailer->setTo($this->admin_email);
+$mailer->setSubject("Yii2-Admin 找回密码");
+if ($mailer->send()) {
+    echo '发送成功';
+}
+
+# 3. 模板
+# common/mail/forget-pass.php
+<p>尊敬的<?php echo $admin_name; ?>，您好：</p>
+
+<p>您的找回密码链接如下：</p>
+
+<?php $url = Yii::$app->urlManager->createAbsoluteUrl(['admin/forget-pass', 'time' => $time, 'admin_name' => $admin_name, 'token' => $token]); ?>
+<p><a href="<?php echo $url; ?>"><?php echo $url; ?></a></p>
+
+<p>该链接10分钟内有效，请勿传递给别人！</p>
+
+<p>该邮件为系统自动发送，请勿回复！</p>
+```
+
 ### Yii2整合AdminLTE后台主题
 
 ```
