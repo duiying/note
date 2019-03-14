@@ -17,39 +17,10 @@
 
 
 ### 基础算法
-二分查找
-```
-<?php
-/**
- * 二分查找
- * 1. 取数组中间值 $mid = floor(($low + $top) / 2);
- * 2. 中间值与目标值比较
- *      中间值小于目标值,首值替换为中间值下一位置,继续第一步操作
- *      中间值大于目标值,尾值替换为中间值上一个位置,继续第一步操作
- *      中间值等于目标值,返回中间值所在位置
- * 3. 重复第二步操作
- */
+- [二分查找](二分查找.md)
 
-function binary($arr, $low, $top, $target) {
-	while ($low <= $top) {
-		$mid = floor(($low + $top) / 2);
-		if ($arr[$mid] == $target) {
-			return $mid;
-		} else if ($arr[$mid] < $target) {
-			$low = $mid + 1;
-		} else {
-			$top = $mid - 1;
-		}
-	}
-
-	return -1;
-}
-
-// 测试
-$arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-// 输出结果: 8
-echo binary($arr, 0, sizeof($arr), 8);
-```
+### 网络协议
+- [TCP三次握手和四次挥手](TCP三次握手和四次挥手.md)
 
 ### Redis相关
 Redis支持的数据类型有哪些

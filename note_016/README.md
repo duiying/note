@@ -105,6 +105,10 @@ lrwxrwxrwx 1 root root 4 Aug 14  2018 /usr/bin/sh -> bash
     yum -y install zip
 # git
     yum -y install git
+# which
+    yum -y install which
+# crontab
+    yum -y install cronie
 ```
 
 ### 防火墙相关设置
