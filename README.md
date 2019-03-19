@@ -1,6 +1,6 @@
 # 目录结构
 > PHP  
-- [PHP基础](note_013)
+- [基础](note_013)
 - [error集合](note_029)
 - [PHP编码技巧](note_038)
 - [PHP坑人小题](note_039)
